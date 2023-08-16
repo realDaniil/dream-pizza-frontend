@@ -1,0 +1,15 @@
+.paper {
+  width: 400px;
+  padding: 50px;
+  border: 1px solid #dedede;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  .title {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+}

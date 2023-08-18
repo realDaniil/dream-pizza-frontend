@@ -6,6 +6,7 @@ import CreateReview from "./pages/createReview/CreateReview"
 import DeliveryPage from "./pages/DeliveryPage"
 import ContactsPage from "./pages/ContactsPage"
 import AllReviewsPage from "./pages/allReviews/AllReviewsPage"
+import CabinetPage from "./pages/CabinetPage"
 
 import {
   BASKET_ROUTE,
@@ -18,7 +19,8 @@ import {
   REGISTRATION_ROUTE,
   CREATE_REVIEW_ROUTE,
   EDIT_PRODUCT_ROUTE,
-  EDIT_REVIEW_ROUTE
+  EDIT_REVIEW_ROUTE,
+  CABINET_ROUTE
 } from "./utils/constants"
 
 export const publicRoutes = [
@@ -68,9 +70,12 @@ export const authRoutes = [
   {
     path: EDIT_REVIEW_ROUTE + '/:id',
     Element: CreateReview
+  },
+  {
+    path: CABINET_ROUTE,
+    Element: CabinetPage
   }
 ]
-
 
 export const adminRoutes = [
   {

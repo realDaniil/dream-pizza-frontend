@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { LOGIN_ROUTE, REGISTRATION_ROUTE } from '../../utils/constants'
 import { Avatar, Button, FormControl, InputLabel, Paper, Typography } from '@mui/material'
@@ -6,12 +6,17 @@ import TextField from '@mui/material/TextField';
 import { useForm } from 'react-hook-form'
 import cl from './AuthPage.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchLogin, fetchRegistration, selectIsAuth } from '../../store/slices/auth';
 import myAxios from '../../myAxios'
+import { fetchUser } from '../../store/actions/actions';
 
 const AuthPage = () => {
-  const isAuth = useSelector(selectIsAuth)
+  const navigate = useNavigate()
   const dispatch = useDispatch()
+  const isAuth = useSelector(state => state.user)
+  useEffect(() => {
+    dispatch(fetchUser())
+  }, [dispatch])
+
   const location = useLocation()
   const isLoginPage = location.pathname === LOGIN_ROUTE
   const { register, handleSubmit, setError, formState: { errors, isValid } } = useForm({
@@ -27,6 +32,7 @@ const AuthPage = () => {
       try {
         const { data } = await myAxios.post('/auth/login', values)
         window.localStorage.setItem('token', data.token)
+        navigate('/')
       } catch (error) {
         console.error(error.response.data.message)
         alert('Помилка при авторизації')
@@ -35,13 +41,13 @@ const AuthPage = () => {
       try {
         const { data } = await myAxios.post('/auth/registration', values)
         window.localStorage.setItem('token', data.token)
+        navigate('/')
       } catch (error) {
         console.error(error.response.data.message)
         alert('Помилка при реєстрації')
       }
     }
   }
-  const navigate = useNavigate()
   if (isAuth) {
     navigate('/')
   }

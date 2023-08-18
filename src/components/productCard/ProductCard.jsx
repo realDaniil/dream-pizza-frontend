@@ -1,11 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card } from '@mui/material'
 import ElementDeleteModal from '../ElementDeleteModal'
 import EditAndRemoveMenu from '../EditAndRemoveMenu'
 import { EDIT_PRODUCT_ROUTE } from '../../utils/constants'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchUser } from '../../store/actions/actions'
 
 const ProductCard = ({ name, prices, ingredients, imageUrl, id }) => {
-  const isAdmin = true
+  const dispatch = useDispatch()
+  const userData = useSelector(state => state.user?.userData)
+
+  useEffect(() => {
+    dispatch(fetchUser())
+  }, [dispatch])
+  const isAdmin = userData?.role === 'ADMIN'
   const [isModalActive, setIsModalActive] = useState(false)
   return (
     <Card sx={{ width: 'min-content', p: 2 }}>

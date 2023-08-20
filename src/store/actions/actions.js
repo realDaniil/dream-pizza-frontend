@@ -1,4 +1,4 @@
-import myAxios from '../../myAxios'
+import { myAxios } from '../../myAxios'
 
 export const setUser = (userData) => {
   return {

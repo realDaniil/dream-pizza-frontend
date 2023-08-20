@@ -1,5 +1,5 @@
 // import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-// import myAxios from '../../myAxios'
+// import { myAxios } from '../../myAxios'
 
 // export const authReducer = createAsyncThunk('auth/authReducer', async () => {
 //   const { data } = await myAxios.get('/auth/me')
@@ -39,7 +39,7 @@
 
 
 // import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-// import myAxios from '../../myAxios'
+// import { myAxios } from '../../myAxios'
 
 // export const fetchLogin = createAsyncThunk('auth/fetchLogin', async (params) => {
 //   const { data } = await myAxios.post('/auth/login', params)

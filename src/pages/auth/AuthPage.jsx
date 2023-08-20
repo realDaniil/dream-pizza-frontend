@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 import { useForm } from 'react-hook-form'
 import cl from './AuthPage.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import myAxios from '../../myAxios'
+import { myAxios } from '../../myAxios'
 import { fetchUser } from '../../store/actions/actions';
 
 const AuthPage = () => {
@@ -25,7 +25,7 @@ const AuthPage = () => {
       email: '',
       password: ''
     },
-    mode: 'onChange'
+    mode: 'onChange',
   })
   const onSubmit = async (values) => {
     if (isLoginPage) {
@@ -34,7 +34,7 @@ const AuthPage = () => {
         window.localStorage.setItem('token', data.token)
         navigate('/')
       } catch (error) {
-        console.error(error.response.data.message)
+        console.error(error)
         alert('Помилка при авторизації')
       }
     } else {
@@ -43,13 +43,21 @@ const AuthPage = () => {
         window.localStorage.setItem('token', data.token)
         navigate('/')
       } catch (error) {
-        console.error(error.response.data.message)
+        console.error(error)
         alert('Помилка при реєстрації')
       }
     }
   }
   if (isAuth) {
     navigate('/')
+  }
+
+  const fullNameValidate = value => {
+    return value.length >= 3 || "Повне ім'я повинне мати як мінімум 3 символи"
+  }
+
+  const passwordValidate = value => {
+    return value.length >= 5 || "Пароль повинен мати як мінімум 5 символів"
   }
 
   return (
@@ -62,7 +70,7 @@ const AuthPage = () => {
               <Avatar sx={{ width: 100, height: 100, mb: '20px', mx: 'auto' }} />
             </div>
             <TextField
-              {...register('fullName', { required: "Вкажіть повне ім'я" })}
+              {...register('fullName', { required: "Вкажіть повне ім'я", validate: fullNameValidate })}
               helperText={errors.fullName?.message}
               error={Boolean(errors.fullName?.message)}
               sx={{ mb: 3 }}
@@ -82,7 +90,7 @@ const AuthPage = () => {
           fullWidth
         />
         <TextField
-          {...register('password', { required: 'Вкажіть пароль' })}
+          {...register('password', { required: 'Вкажіть пароль', validate: passwordValidate })}
           helperText={errors.password?.message}
           error={Boolean(errors.password?.message)}
           sx={{ mb: 3 }}
@@ -110,6 +118,8 @@ const AuthPage = () => {
           Вже є обліковий запис? <Link to={LOGIN_ROUTE}>Увійдіть!</Link>
         </div>
       }
+      <br />
+      <b>Админ данные:<br />admin@mail.com<br />qwerty</b>
     </Paper>
   )
 }

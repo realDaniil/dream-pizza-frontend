@@ -2,33 +2,26 @@ import React, { useEffect, useRef, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-import myAxios from '../../myAxios';
+import { myAxios } from '../../myAxios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import CreateProductSkeleton from './CreateProductSkeleton';
-import { FormControlLabel, Switch } from '@mui/material';
+import ProductCard from '../../components/productCard/ProductCard'
+import SelectType from '../../components/productCreationElements/SelectType';
+import SelectPrice from '../../components/productCreationElements/SelectPrice';
 
 const CreateProduct = () => {
   const { id } = useParams()
   const isEditing = Boolean(id)
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(true)
-  const [type, setType] = useState('pizza')
+  const [type, setType] = useState()
   const [name, setName] = useState('')
   const [ingredients, setIngredients] = useState('')
   const [imageUrl, setImageUrl] = useState('')
 
-  const [smallPrice, setSmallPrice] = useState()
-  const [mediumPrice, setMediumPrice] = useState()
-  const [largePrice, setLargePrice] = useState()
-  const [anyPrice, setAnyPrice] = useState()
-  const [checked, setChecked] = useState(true)
+  const [submitPrices, setSubmitPrices] = useState([])
 
   const inputFileRef = useRef(null)
-
-
-  const handleSwitchChange = (e) => {
-    setChecked(e.target.checked)
-  }
 
   const handleChangeFile = async e => {
     try {
@@ -55,16 +48,10 @@ const CreateProduct = () => {
           setType(data.type || '')
           setIngredients(data.ingredients ? data.ingredients.join(', ') : '')
           setImageUrl(data.imageUrl || '')
-          setSmallPrice(data.prices.find(obj => obj.size === 'small')?.price)
-          setMediumPrice(data.prices.find(obj => obj.size === 'medium')?.price)
-          setLargePrice(data.prices.find(obj => obj.size === 'large')?.price)
-          setAnyPrice(data.prices.find(obj => obj.size === 'any')?.price)
         })
         .catch(err => console.log(err))
         .finally(() => setIsLoading(false))
-    } else {
-      setIsLoading(false)
-    }
+    } else setIsLoading(false)
   }, [id])
 
   const onSubmit = async () => {
@@ -73,13 +60,7 @@ const CreateProduct = () => {
         name: name,
         ingredients: ingredients.split(','),
         type: type,
-        prices: checked
-          ? [
-            { size: 'small', price: smallPrice },
-            { size: 'medium', price: mediumPrice },
-            { size: 'large', price: largePrice },
-          ]
-          : [{ size: 'any', price: anyPrice }],
+        prices: submitPrices,
         imageUrl
       }
 
@@ -95,21 +76,19 @@ const CreateProduct = () => {
 
   if (isLoading) return <CreateProductSkeleton />
 
-
   return (
     <Paper style={{ padding: 30 }}>
+      {imageUrl &&
+        <ProductCard previewMode imageUrl={imageUrl} type={type} name={name} prices={submitPrices} ingredients={ingredients.split(',')} />
+      }
       <Button onClick={() => inputFileRef.current.click()} variant="outlined" size="large">
         Загрузить превью
       </Button>
-      <input  type="file" ref={inputFileRef} onChange={handleChangeFile} hidden />
-      {imageUrl &&
-        <>
-          <Button variant="contained" color="error" onClick={onClickRemoveImage}>
+      {imageUrl}
+      <Button variant="contained" disabled={!imageUrl} color="error" onClick={onClickRemoveImage}>
             Удалить
           </Button>
-          <img height={100} src={`http://localhost:4444${imageUrl}`} alt="Uploaded" />
-        </>
-      }
+      <input type="file" ref={inputFileRef} onChange={handleChangeFile} hidden />
       <br />
       <br />
       <TextField
@@ -126,61 +105,9 @@ const CreateProduct = () => {
         value={ingredients}
         onChange={e => setIngredients(e.target.value)}
       />
-      <TextField
-        variant="standard"
-        label="Тип товару"
-        fullWidth
-        value={type}
-        onChange={e => setType(e.target.value)}
-      />
+      <SelectType setType={setType} type={type} />
+      <SelectPrice isEditing={isEditing} id={id} submitPrices={submitPrices} setSubmitPrices={setSubmitPrices} />
 
-      <FormControlLabel style={{ userSelect: 'none' }}
-        control={
-          <Switch
-            checked={checked}
-            onChange={handleSwitchChange}
-          />
-        }
-        label={checked ? "Створити ціни до трьох розмірів" : 'Створити ціну для одного розміру'}
-      />
-      {checked ?
-        <>
-          <TextField
-            variant="standard"
-            label='Малий розмір'
-            type='number'
-            fullWidth
-            value={smallPrice}
-            onChange={e => setSmallPrice(e.target.value)}
-          />
-          <TextField
-            variant="standard"
-            label='Середній розмір'
-            type='number'
-            fullWidth
-            value={mediumPrice}
-            onChange={e => setMediumPrice(e.target.value)}
-          />
-          <TextField
-            variant="standard"
-            label='Великий розмір'
-            type='number'
-            fullWidth
-            value={largePrice}
-            onChange={e => setLargePrice(e.target.value)}
-          />
-
-        </>
-        :
-        <TextField
-          variant="standard"
-          label="Стандартний розмір"
-          type='number'
-          fullWidth
-          value={anyPrice}
-          onChange={e => setAnyPrice(e.target.value)}
-        />
-      }
       <div>
         <Button onClick={onSubmit} size="large" variant="contained">
           {!isEditing ? 'Створити' : 'Відредагувати'}

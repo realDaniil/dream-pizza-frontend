@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import cl from './CreateReview.module.scss'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ALL_REVIEWS_ROUTE } from '../../utils/constants'
-import myAxios from '../../myAxios'
+import { myAxios } from '../../myAxios'
 import CreateReviewSkeleton from './CreateReviewSkeleton'
 
 const CreateReview = () => {

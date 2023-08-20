@@ -6,6 +6,7 @@ import { Avatar, Container, IconButton, Tooltip, Typography } from '@mui/materia
 import cl from './Layout.module.scss'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser } from '../../store/actions/actions';
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 
 const Layout = ({ children }) => {
   const navigate = useNavigate()
@@ -35,7 +36,10 @@ const Layout = ({ children }) => {
         </IconButton>
         <Tooltip title={userData?.fullName}>
           <IconButton onClick={() => navigate(!userData ? LOGIN_ROUTE : CABINET_ROUTE)}>
-            <Avatar sx={{ width: 30, height: 30 }}>{userData?.fullName[0]}</Avatar>
+            {userData?.role === 'ADMIN'
+              ? <Avatar sx={{ width: 30, height: 30 }}><VerifiedUserIcon style={{ color: 'white' }} /></Avatar>
+              : <Avatar sx={{ width: 30, height: 30 }}>{userData?.fullName[0]}</Avatar>
+            }
           </IconButton>
         </Tooltip>
       </header>

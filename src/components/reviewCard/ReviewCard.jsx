@@ -20,8 +20,7 @@ const ReviewCard = ({ data }) => {
   const isLoading = Boolean(!data)
   if (isLoading) return <ReviewCardSkeleton />
 
-  const updatedAtString = data.updatedAt
-  const updatedAtDate = new Date(updatedAtString)
+  const updatedAtDate = new Date(data.updatedAt)
   const formattedDate =
     updatedAtDate.getFullYear() + '-' +
     (updatedAtDate.getMonth() + 1).toString().padStart(2, '0') + '-' +

@@ -1,5 +1,5 @@
 // import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-// import myAxios from '../../myAxios';
+// import { myAxios } from '../../myAxios';
 
 // export const fetchUser = createAsyncThunk('user/fetchUser', async () => {
 //   const { data } = await myAxios.get('/auth/me');

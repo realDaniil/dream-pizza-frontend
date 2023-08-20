@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import myAxios from '../myAxios'
+import { myAxios } from '../myAxios'
 import ProductCard from '../components/productCard/ProductCard'
 import ProductCardSkeleton from '../components/productCard/ProductCardSkeleton'
 
@@ -33,6 +33,7 @@ const MainPage = () => {
             imageUrl={e.imageUrl}
             prices={e.prices}
             name={e.name}
+            type={e.type}
             id={e._id}
           />
         )

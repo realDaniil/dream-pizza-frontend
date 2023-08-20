@@ -6,7 +6,7 @@ import CreateReview from "./pages/createReview/CreateReview"
 import DeliveryPage from "./pages/DeliveryPage"
 import ContactsPage from "./pages/ContactsPage"
 import AllReviewsPage from "./pages/allReviews/AllReviewsPage"
-import CabinetPage from "./pages/CabinetPage"
+import CabinetPage from "./pages/cabinet/CabinetPage"
 
 import {
   BASKET_ROUTE,

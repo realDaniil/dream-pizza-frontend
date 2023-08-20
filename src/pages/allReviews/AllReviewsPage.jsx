@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import cl from './AllReviewsPage.module.scss'
-import myAxios from '../../myAxios'
+import { myAxios } from '../../myAxios'
 import ReviewCard from '../../components/reviewCard/ReviewCard'
 import ReviewCardSkeleton from '../../components/reviewCard/ReviewCardSkeleton'
 

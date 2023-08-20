@@ -6,7 +6,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import myAxios from '../myAxios'
+import { myAxios } from '../myAxios'
 import Slide from '@mui/material/Slide';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -14,7 +14,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 })
 
 export default function ElementDeleteModal({ password, passwordMode = true, visible, onClose, id, title, body, deleteRoute }) {
-  const [open, setOpen] = useState(visible);
+  const [open, setOpen] = useState(visible)
   const [inputValue, setInputValue] = useState('')
   useEffect(() => {
     setOpen(visible)

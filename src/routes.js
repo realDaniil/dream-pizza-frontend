@@ -1,4 +1,4 @@
-import AboutPage from "./pages/AboutPage"
+import AboutPage from "./pages/about/AboutPage"
 import AuthPage from "./pages/auth/AuthPage"
 import BasketPage from "./pages/BasketPage"
 import CreateProduct from "./pages/createProduct/CreateProduct"

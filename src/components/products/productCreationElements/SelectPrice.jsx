@@ -1,12 +1,12 @@
 import { FormControlLabel, Switch, TextField } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import { myAxios } from '../../myAxios'
+import { myAxios } from '../../../myAxios'
 
 const SelectPrice = ({ isEditing = false, submitPrices, setSubmitPrices, id }) => {
-  const [smallPrice, setSmallPrice] = useState()
-  const [mediumPrice, setMediumPrice] = useState()
-  const [largePrice, setLargePrice] = useState()
-  const [anyPrice, setAnyPrice] = useState()
+  const [smallPrice, setSmallPrice] = useState('')
+  const [mediumPrice, setMediumPrice] = useState('')
+  const [largePrice, setLargePrice] = useState('')
+  const [anyPrice, setAnyPrice] = useState('')
   const [checked, setChecked] = useState(true)
   const [isLoading, setIsLoading] = useState(true)
 

@@ -67,13 +67,13 @@ const ChangeUserData = ({ userData, setOpen, open }) => {
         />
         <PasswordInput
           label="Старий пароль"
-          style={{ width: '100%' }}
+          sx={{ width: '100%' }}
           value={currentPassword}
           onChange={e => setCurrentPassword(e.target.value)}
         />
         <PasswordInput
           label="Новий пароль"
-          style={{ width: '100%' }}
+          sx={{ width: '100%' }}
           value={newPassword}
           onChange={e => setNewPassword(e.target.value)}
         />

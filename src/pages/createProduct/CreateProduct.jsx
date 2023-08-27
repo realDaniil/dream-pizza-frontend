@@ -5,9 +5,9 @@ import Button from '@mui/material/Button';
 import { myAxios } from '../../myAxios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import CreateProductSkeleton from './CreateProductSkeleton';
-import ProductCard from '../../components/productCard/ProductCard'
-import SelectType from '../../components/productCreationElements/SelectType';
-import SelectPrice from '../../components/productCreationElements/SelectPrice';
+import ProductCard from '../../components/products/productCard/ProductCard'
+import SelectType from '../../components/products/productCreationElements/SelectType';
+import SelectPrice from '../../components/products/productCreationElements/SelectPrice';
 
 const CreateProduct = () => {
   const { id } = useParams()
@@ -105,9 +105,8 @@ const CreateProduct = () => {
         value={ingredients}
         onChange={e => setIngredients(e.target.value)}
       />
-      <SelectType setType={setType} type={type} />
+      <SelectType isEditing={isEditing} id={id} setType={setType} type={type} />
       <SelectPrice isEditing={isEditing} id={id} submitPrices={submitPrices} setSubmitPrices={setSubmitPrices} />
-
       <div>
         <Button onClick={onSubmit} size="large" variant="contained">
           {!isEditing ? 'Створити' : 'Відредагувати'}

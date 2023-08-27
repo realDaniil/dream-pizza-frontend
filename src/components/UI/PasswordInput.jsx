@@ -2,7 +2,7 @@ import React from 'react'
 import { FormControl, FormHelperText, IconButton, Input, InputAdornment, InputLabel, OutlinedInput } from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 
-const PasswordInput = ({ variant, style, value, onChange, label = 'Пароль', error, helperText, register }) => {
+const PasswordInput = ({ variant, sx, value, onChange, label = 'Пароль', error, helperText, register }) => {
   const [showPassword, setShowPassword] = React.useState(false)
 
   const handleClickShowPassword = () => setShowPassword(show => !show)
@@ -14,12 +14,15 @@ const PasswordInput = ({ variant, style, value, onChange, label = 'Пароль'
   return (
     <>
       {variant === "outlined" ? (
-        <FormControl sx={style} variant="outlined" error={error}>
+        <FormControl sx={sx} variant="outlined" error={error}>
           <InputLabel htmlFor="outlined-adornment-password">{label}</InputLabel>
           <OutlinedInput
             value={value}
             onChange={onChange}
             type={showPassword ? 'text' : 'password'}
+            {...register}
+            id="outlined-adornment-password"
+            autoComplete="current-password"
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -37,12 +40,15 @@ const PasswordInput = ({ variant, style, value, onChange, label = 'Пароль'
           <FormHelperText>{helperText}</FormHelperText>
         </FormControl>
       ) : (
-        <FormControl sx={style} variant="standard" error={error}>
+        <FormControl sx={sx} variant="standard" error={error}>
           <InputLabel htmlFor="standard-adornment-password">{label}</InputLabel>
           <Input
             value={value}
             onChange={onChange}
             type={showPassword ? 'text' : 'password'}
+            {...register}
+            id="standard-adornment-password"
+            autoComplete="current-password"
             endAdornment={
               <InputAdornment position="end">
                 <IconButton

@@ -1,0 +1,36 @@
+.card {
+  min-width: 280px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .EditAndRemoveMenu {
+    display: flex;
+    justify-content: end;
+    position: absolute;
+    width: 280px;
+  }
+
+  .img_holder {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    img {
+      width: 100%;
+      pointer-events: none;
+    }
+  }
+
+  .selectPriceHolder {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    button {
+      font-size: 12px;
+      margin: 0 4px;
+      padding: 8px 12px;
+    }
+  }
+}

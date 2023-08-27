@@ -1,0 +1,59 @@
+@import '../../../styles/variables.scss';
+
+.myButton {
+  color: #ffffff;
+  background: $primary-orange;
+  cursor: pointer;
+  border: none;
+  outline: 2px transparent solid;
+  padding: 10px 20px;
+  border-radius: 20px;
+  transition: 0.2s;
+  user-select: none;
+  box-shadow: none;
+
+  &.active {
+    pointer-events: none;
+
+    &:focus {
+      box-shadow: none;
+    }
+
+    &:active {
+      box-shadow: none;
+    }
+  }
+
+  &.notActive {
+    background: #ffffff;
+    color: $primary-orange;
+
+    &:focus {
+      box-shadow: none;
+    }
+
+    &:active {
+      box-shadow: none;
+    }
+  }
+
+  &:active {
+    box-shadow: 0 0 0 0.2rem rgba(255, 187, 0, 0.5);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 187, 0, 0.5);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background: rgb(255, 119, 0);
+    }
+  }
+
+  @media (hover: none) {
+    &:active {
+      background: orange;
+    }
+  }
+}

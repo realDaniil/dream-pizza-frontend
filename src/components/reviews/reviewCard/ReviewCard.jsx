@@ -1,11 +1,11 @@
 import { Card, Rating } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import ReviewCardSkeleton from './ReviewCardSkeleton'
-import EditAndRemoveMenu from '../EditAndRemoveMenu'
-import { EDIT_REVIEW_ROUTE } from '../../utils/constants'
-import ElementDeleteModal from '../ElementDeleteModal'
+import EditAndRemoveMenu from '../../UI/EditAndRemoveMenu'
+import { EDIT_REVIEW_ROUTE } from '../../../utils/constants'
+import ElementDeleteModal from '../../UI/ElementDeleteModal'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchUser } from '../../store/actions/actions'
+import { fetchUser } from '../../../store/actions/actions'
 
 const ReviewCard = ({ data }) => {
   const dispatch = useDispatch()

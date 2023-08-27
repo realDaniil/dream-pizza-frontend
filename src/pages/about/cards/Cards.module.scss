@@ -1,0 +1,50 @@
+@import '../../../styles/variables.scss';
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+  align-items: stretch;
+
+  .card {
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20%;
+    padding: 1rem;
+    border-radius: 8px;
+
+    .img_holder {
+      border-radius: 4px;
+      background: black;
+      width: 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      padding-bottom: 100%;
+    }
+
+    .img_holder1 {
+      background-image: url('../../../img/about_card1.jpg');
+    }
+
+    .img_holder2 {
+      background-image: url('../../../img/about_card2.jpg');
+    }
+
+    .img_holder3 {
+      background-image: url('../../../img/about_card3.jpg');
+    }
+
+    .text {
+      margin-top: 1rem;
+      text-wrap: balance;
+
+      span {
+        color: $primary-orange;
+      }
+    }
+  }
+}

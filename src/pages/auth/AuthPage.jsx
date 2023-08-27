@@ -8,6 +8,7 @@ import cl from './AuthPage.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { myAxios } from '../../myAxios'
 import { fetchUser } from '../../store/actions/actions';
+import PasswordInput from '../../components/UI/PasswordInput';
 
 const AuthPage = () => {
   const navigate = useNavigate()
@@ -89,7 +90,7 @@ const AuthPage = () => {
           type='email'
           fullWidth
         />
-        <TextField
+        {/* <TextField
           {...register('password', { required: 'Вкажіть пароль', validate: passwordValidate })}
           helperText={errors.password?.message}
           error={Boolean(errors.password?.message)}
@@ -97,6 +98,14 @@ const AuthPage = () => {
           label="Пароль"
           variant="outlined"
           fullWidth
+        /> */}
+        <PasswordInput
+          sx={{width: '100%', mb: 3}}
+          variant='outlined'
+          label='Пароль'
+          helperText={errors.password?.message}
+          error={Boolean(errors.password?.message)}
+          register={register('password', { required: 'Вкажіть пароль', validate: passwordValidate })}
         />
         <Button
           type='submit'

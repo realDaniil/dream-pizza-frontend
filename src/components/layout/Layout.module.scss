@@ -1,14 +1,30 @@
 .layout {
-  .header {
+  padding-top: 60px;
+
+  .appBar {
     width: 100%;
     height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    background: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+    * {
+      color: white;
+    }
+
+    a {
+      text-decoration: none;
+    }
 
     .logo_holder {
       display: flex;
       align-items: center;
+
       img {
         height: 40px;
       }

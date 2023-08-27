@@ -1,34 +1,41 @@
 import { Routes, Route } from 'react-router-dom';
-import MainPage from '../pages/MainPage';
+import HomePage from '../pages/home/HomePage';
 import { adminRoutes, authRoutes, publicRoutes } from '../routes';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser } from '../store/actions/actions';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import MyLoader from './UI/MyLoader';
 
 const AppRouter = () => {
   const dispatch = useDispatch()
   const userData = useSelector(state => state.user?.userData)
+  const [isLoading, setIsLoading] = useState(true)
+
   useEffect(() => {
     dispatch(fetchUser())
-  }, [dispatch])
+      .then(() => {
+        setIsLoading(false)
+      })
+  }, [dispatch])  
 
   const isAuth = Boolean(userData)
   const isAdmin = userData?.role === 'ADMIN'
-  // const isAuth = true
-  // const isAdmin = true
+
+  if (isLoading) return <MyLoader />
+
   return (
     <Routes>
-    {isAuth && authRoutes.map(({ path, Element }) => (
-      <Route key={path} path={path} element={<Element />} />
-    ))}
-    {isAdmin && adminRoutes.map(({ path, Element }) => (
-      <Route key={path} path={path} element={<Element />} />
-    ))}
-    {publicRoutes.map(({ path, Element }) => (
-      <Route key={path} path={path} element={<Element />} />
-    ))}
-    <Route path='*' element={<MainPage />} />
-  </Routes>
+      {isAuth && authRoutes.map(({ path, Element }) => (
+        <Route key={path} path={path} element={<Element />} />
+      ))}
+      {isAdmin && adminRoutes.map(({ path, Element }) => (
+        <Route key={path} path={path} element={<Element />} />
+      ))}
+      {publicRoutes.map(({ path, Element }) => (
+        <Route key={path} path={path} element={<Element />} />
+      ))}
+      <Route path='*' element={<HomePage />} />
+    </Routes>
   )
 }
 

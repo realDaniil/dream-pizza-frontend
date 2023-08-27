@@ -2,45 +2,76 @@ import React, { useEffect, useState } from 'react'
 import { userLogout } from '../../store/actions/actions'
 import { useDispatch } from 'react-redux'
 import { myAxios } from '../../myAxios'
-import { Box, Button, Modal, TextField } from '@mui/material'
+import { Button, CircularProgress, LinearProgress } from '@mui/material'
 import ChangeUserData from './ChangeUserData'
+import MyLoader from '../../components/UI/MyLoader'
+import { useQuery } from 'react-query'
+import { useNavigate } from 'react-router-dom'
+
+const getUserData = async () => {
+  const { data } = await myAxios.get('/auth/me')
+  return data
+}
 
 const CabinetPage = () => {
   const dispatch = useDispatch()
-  const [userData, setUserData] = useState()
-  const [isLoading, setIsLoading] = useState(true)
-  const [open, setOpen] = useState(true)
+  const { data, isLoading } = useQuery('userData', getUserData)
+  const isAdmin = data?.userData?.role === 'ADMIN'
+  const [open, setOpen] = useState(false)
+  const navigate = useNavigate()
+  const logout = () => {
+    dispatch(userLogout())
+    navigate('/')
+  }
 
-  useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const { data } = await myAxios.get('/auth/me')
-        setUserData(data.userData)
-      } catch (error) {
-        console.log(error)
-      } finally {
-        setIsLoading(false)
-      }
+  const restoreReviews = async () => {
+    try {
+      await myAxios.post('/reviews/copy')
+    } catch (error) {
+      console.log(error)
     }
-    getUserData()
-  }, [])
+  }
 
-  const createdAtDate = new Date(userData?.createdAt)
+  const restoreProducts = async () => {
+    try {
+      await myAxios.post('/products/copy')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const restoreTypes = async () => {
+    try {
+      await myAxios.post('/type/copy')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
+  const createdAtDate = new Date(data?.userData?.createdAt)
   const formattedDate =
     createdAtDate.getFullYear() + '-' +
     (createdAtDate.getMonth() + 1).toString().padStart(2, '0') + '-' +
     createdAtDate.getDate().toString().padStart(2, '0') + ' ' +
     createdAtDate.getHours().toString().padStart(2, '0') + ':' +
     createdAtDate.getMinutes().toString().padStart(2, '0')
-  if (isLoading) return <>Loading...</>
+  if (isLoading) return <MyLoader />
   return (
     <div>
-      <button onClick={() => dispatch(userLogout())}>выйти</button>
-      <h3>{userData?.fullName}</h3>
-      <p>{userData?.email}</p>
+      {isAdmin &&
+        <div>
+          <Button onClick={restoreReviews}>Відновити відгуки</Button>
+          <Button onClick={restoreProducts}>Відновити продукти</Button>
+          <Button onClick={restoreTypes}>Відновити типи</Button>
+        </div>
+      }
+      <button onClick={logout}>выйти</button>
+      <h3>{data?.userData?.fullName}</h3>
+      <p>{data?.userData?.email}</p>
       <p>Дата регистрации: {formattedDate}</p>
       <Button variant="contained" onClick={() => setOpen(true)}>Змінити данні</Button>
-      <ChangeUserData setOpen={setOpen} open={open} userData={userData} />
+      <ChangeUserData setOpen={setOpen} open={open} userData={data?.userData} />
     </div>
   )
 }

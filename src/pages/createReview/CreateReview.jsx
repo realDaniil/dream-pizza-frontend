@@ -1,10 +1,12 @@
-import { Button, Paper, Rating, TextField, TextareaAutosize } from '@mui/material'
+import { Box, Button, Paper, Rating, TextField, TextareaAutosize } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import cl from './CreateReview.module.scss'
 import { useNavigate, useParams } from 'react-router-dom'
-import { ABOUT_ROUTE } from '../../utils/constants'
+import { ABOUT_ROUTE, LOGIN_ROUTE } from '../../utils/constants'
 import { myAxios } from '../../myAxios'
 import CreateReviewSkeleton from './CreateReviewSkeleton'
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUser } from './../../store/slices/userSlice';
 
 const CreateReview = () => {
   const { id } = useParams()
@@ -14,6 +16,13 @@ const CreateReview = () => {
   const [text, setText] = useState('')
   const [starsValue, setStarsValue] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
+  const dispatch = useDispatch()
+  const userData = useSelector(state => state.user.user?.userData)
+  useEffect(() => {
+    dispatch(fetchUser()).then(() => {
+      if (!userData) navigate(LOGIN_ROUTE)
+    })
+  }, [dispatch])
 
   useEffect(() => {
     if (isEditing) {
@@ -48,16 +57,17 @@ const CreateReview = () => {
   }
   if (isLoading) return <CreateReviewSkeleton />
   return (
-    <div>
+    <div className={cl.holder}>
       <Paper className={cl.paper}>
         <TextField
-          id="standard-basic"
+          color='warning'
           label="Заголовок"
           variant="standard"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
         <TextareaAutosize
+          color='warning'
           style={{ overflow: 'auto' }}
           className={cl.textarea}
           placeholder='Текст'
@@ -70,9 +80,11 @@ const CreateReview = () => {
           onChange={(event, newValue) => {
             setStarsValue(newValue)
           }}
-        /> 
-        <Button variant="outlined" onClick={() => navigate(ABOUT_ROUTE)}>Відміна</Button>
-        <Button onClick={onSubmit} variant="contained">{isEditing ? 'Змінити' : 'Відправити'}</Button>
+        />
+        <Box width={'100%'} mt={'1rem'} display={'flex'}>
+          <Button fullWidth color='warning' onClick={onSubmit} variant="contained">{isEditing ? 'Змінити' : 'Відправити'}</Button>
+          <Button sx={{ ml: '1rem' }} color='warning' onClick={() => navigate(ABOUT_ROUTE)}>Відміна</Button>
+        </Box>
       </Paper>
     </div>
   )

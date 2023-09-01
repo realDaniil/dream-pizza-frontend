@@ -3,11 +3,14 @@ import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import { myAxios } from '../../myAxios';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import CreateProductSkeleton from './CreateProductSkeleton';
-import ProductCard from '../../components/products/productCard/ProductCard'
 import SelectType from '../../components/products/productCreationElements/SelectType';
 import SelectPrice from '../../components/products/productCreationElements/SelectPrice';
+import cl from './CreateProduct.module.scss'
+import DragAndDrop from '../../components/UI/dragAndDrop/DragAndDrop';
+import { Card, FormControlLabel, Switch } from '@mui/material';
+import MyImage from '../../components/UI/MyImage';
 
 const CreateProduct = () => {
   const { id } = useParams()
@@ -18,6 +21,7 @@ const CreateProduct = () => {
   const [name, setName] = useState('')
   const [ingredients, setIngredients] = useState('')
   const [imageUrl, setImageUrl] = useState('')
+  const [checked, setChecked] = useState(false)
 
   const [submitPrices, setSubmitPrices] = useState([])
 
@@ -48,6 +52,7 @@ const CreateProduct = () => {
           setType(data.type || '')
           setIngredients(data.ingredients ? data.ingredients.join(', ') : '')
           setImageUrl(data.imageUrl || '')
+          setChecked(data?.isTopSales || false)
         })
         .catch(err => console.log(err))
         .finally(() => setIsLoading(false))
@@ -61,6 +66,7 @@ const CreateProduct = () => {
         ingredients: ingredients.split(','),
         type: type,
         prices: submitPrices,
+        isTopSales: checked,
         imageUrl
       }
 
@@ -77,41 +83,55 @@ const CreateProduct = () => {
   if (isLoading) return <CreateProductSkeleton />
 
   return (
-    <Paper style={{ padding: 30 }}>
-      {imageUrl &&
-        <ProductCard previewMode imageUrl={imageUrl} type={type} name={name} prices={submitPrices} ingredients={ingredients.split(',')} />
-      }
-      <Button onClick={() => inputFileRef.current.click()} variant="outlined" size="large">
-        Загрузить превью
-      </Button>
-      {imageUrl}
-      <Button variant="contained" disabled={!imageUrl} color="error" onClick={onClickRemoveImage}>
-            Удалить
-          </Button>
-      <input type="file" ref={inputFileRef} onChange={handleChangeFile} hidden />
-      <br />
-      <br />
+    <Paper className={cl.paper}>
+      <div className={cl.cardHolder}>
+        {imageUrl ?
+          <Card className={cl.imgCard}>
+            <MyImage src={imageUrl} />
+          </Card>
+          : <DragAndDrop setImageUrl={setImageUrl} />
+        }
+        <Button color={'warning'} disabled={imageUrl.length !== 0} onClick={() => inputFileRef.current.click()} variant="outlined" size="large">
+          Загрузить превью
+        </Button>
+        <Button variant="contained" disabled={imageUrl.length === 0} color="error" onClick={onClickRemoveImage}>
+          Удалить
+        </Button>
+        <input type="file" ref={inputFileRef} onChange={handleChangeFile} hidden />
+      </div>
       <TextField
+        color={'warning'}
         variant="standard"
         label="Назва продукту"
-        fullWidth
+        className={cl.textField}
         value={name}
         onChange={e => setName(e.target.value)}
       />
       <TextField
+        color={'warning'}
         variant="standard"
         label="Інгредієнти"
-        fullWidth
+        className={cl.textField}
         value={ingredients}
         onChange={e => setIngredients(e.target.value)}
+      />
+      <FormControlLabel sx={{ userSelect: 'none', mt: '16px' }}
+        control={
+          <Switch
+            color={'warning'}
+            checked={checked}
+            onChange={e => setChecked(e.target.checked)}
+          />
+        }
+        label={"В топ продажів"}
       />
       <SelectType isEditing={isEditing} id={id} setType={setType} type={type} />
       <SelectPrice isEditing={isEditing} id={id} submitPrices={submitPrices} setSubmitPrices={setSubmitPrices} />
       <div>
-        <Button onClick={onSubmit} size="large" variant="contained">
+        <Button color={'warning'} onClick={onSubmit} size="large" variant="contained">
           {!isEditing ? 'Створити' : 'Відредагувати'}
         </Button>
-        <Button onClick={() => navigate('/')} size="large">Відміна</Button>
+        <Button color={'warning'} onClick={() => navigate('/')} size="large">Відміна</Button>
       </div>
     </Paper>
   )

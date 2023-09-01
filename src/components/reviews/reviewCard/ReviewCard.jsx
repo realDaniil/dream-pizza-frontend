@@ -1,15 +1,17 @@
-import { Card, Rating } from '@mui/material'
+import { Box, Card, Rating } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import ReviewCardSkeleton from './ReviewCardSkeleton'
 import EditAndRemoveMenu from '../../UI/EditAndRemoveMenu'
 import { EDIT_REVIEW_ROUTE } from '../../../utils/constants'
 import ElementDeleteModal from '../../UI/ElementDeleteModal'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchUser } from '../../../store/actions/actions'
+import { fetchUser } from '../../../store/slices/userSlice'
+import cl from './ReviewCard.module.scss'
+import PersonIcon from '@mui/icons-material/Person';
 
 const ReviewCard = ({ data }) => {
   const dispatch = useDispatch()
-  const userData = useSelector(state => state.user?.userData)
+  const userData = useSelector(state => state.user.user?.userData)
 
   useEffect(() => {
     dispatch(fetchUser())
@@ -28,15 +30,21 @@ const ReviewCard = ({ data }) => {
     updatedAtDate.getHours().toString().padStart(2, '0') + ':' +
     updatedAtDate.getMinutes().toString().padStart(2, '0')
   return (
-    <Card sx={{ my: 4 }}>
-      {(isUser || isAdmin) && <EditAndRemoveMenu editRoute={EDIT_REVIEW_ROUTE} id={data._id} setIsModalActive={setIsModalActive} />}
-      user:
-      {data?.user?.fullName ? data?.user?.fullName : 'Анонім'}
+    <Card sx={{ my: 4 }} className={cl.card}>
+      {(isUser || isAdmin) &&
+        <div className={cl.editAndRemoveMenuHolder}>
+          <EditAndRemoveMenu editRoute={EDIT_REVIEW_ROUTE} id={data._id} setIsModalActive={setIsModalActive} />
+        </div>
+      }
+      <div className={cl.userNameHolder}>
+        <PersonIcon />
+        {data?.user?.fullName ? data?.user?.fullName : 'Анонім'}
+      </div>
       <br />
-      {formattedDate}
       <h3>{data.title}</h3>
       <p>{data.text}</p>
       <Rating value={data.stars} readOnly />
+      <p>{formattedDate}</p>
       <ElementDeleteModal
         passwordMode={false}
         deleteRoute='reviews'

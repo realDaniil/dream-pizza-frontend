@@ -5,7 +5,6 @@ import CreateProduct from "./pages/createProduct/CreateProduct"
 import CreateReview from "./pages/createReview/CreateReview"
 import DeliveryPage from "./pages/DeliveryPage"
 import ContactsPage from "./pages/ContactsPage"
-import AllReviewsPage from "./pages/allReviews/AllReviewsPage"
 import CabinetPage from "./pages/cabinet/CabinetPage"
 
 import {
@@ -13,7 +12,6 @@ import {
   DELIVERY_ROUTE,
   ABOUT_ROUTE,
   CONTACTS_ROUTE,
-  ALL_REVIEWS_ROUTE,
   CREATE_PRODUCT_ROUTE,
   LOGIN_ROUTE,
   REGISTRATION_ROUTE,
@@ -57,16 +55,12 @@ export const publicRoutes = [
     Element: ContactsPage
   },
   {
-    path: ALL_REVIEWS_ROUTE,
-    Element: AllReviewsPage
+    path: CREATE_REVIEW_ROUTE,
+    Element: CreateReview
   }
 ]
 
 export const authRoutes = [
-  {
-    path: CREATE_REVIEW_ROUTE,
-    Element: CreateReview
-  },
   {
     path: EDIT_REVIEW_ROUTE + '/:id',
     Element: CreateReview

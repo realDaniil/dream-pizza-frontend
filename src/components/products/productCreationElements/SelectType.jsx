@@ -45,10 +45,11 @@ const SelectType = ({ isEditing = false, id, type, setType }) => {
 
   if (isLoading) return <>Loading...</>
   return (
-    <Box>
+    <Box mt={'2rem'}>
       <FormControl fullWidth>
-        <InputLabel>Тип продукту</InputLabel>
+        <InputLabel color={'warning'}>Тип продукту</InputLabel>
         <Select
+          color={'warning'}
           value={type || 'Піца'}
           label={'Тип продукту'}
           onChange={e => setType(e.target.value)}
@@ -60,18 +61,21 @@ const SelectType = ({ isEditing = false, id, type, setType }) => {
           ))}
         </Select>
       </FormControl>
-      {type && <>
-        <p>Видалити {type}?</p>
-        <Button onClick={removeType} disabled={type === 'Піца'} variant='contained' color='error'>Видалити</Button>
-      </>}
-      <Box>
+      <Box display={'flex'} alignItems={'center'} my={'4px'}>
+        {type && <>
+          <p>Видалити {type}?</p>
+          <Button sx={{ml: '1rem'}} onClick={removeType} disabled={type === 'Піца'} variant='contained' color='error'>Видалити</Button>
+        </>}
+      </Box>
+      <Box display={'flex'}>
         <TextField
+          color={'warning'}
           onChange={e => setNewTypeName(e.target.value)}
           value={newTypeName}
           label='Створити тип продукту'
           placeholder='Піца, напоЇ, соуси'
         />
-        <Button onClick={createType} variant={'contained'}>Створити тип</Button>
+        <Button sx={{ pr: '1rem' }} color={'warning'} onClick={createType} variant={'contained'}>Створити тип</Button>
       </Box>
     </Box>
   )

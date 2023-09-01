@@ -1,0 +1,31 @@
+.paper {
+  margin: 2rem 0;
+  padding: 30px;
+  .cardHolder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: max-content;
+    margin: auto;
+
+    button {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .imgCard {
+      padding: 1rem;
+      max-width: 300px;
+      max-height: 300px;
+      img {
+        width: 100%;
+        pointer-events: none;
+      }
+    }
+  }
+
+  .textField {
+    width: 100%;
+    margin-top: 1rem;
+  }
+}

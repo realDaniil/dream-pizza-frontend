@@ -1,0 +1,34 @@
+@import '../../../styles/variables.scss';
+
+.dragAndDrop {
+  width: 400px;
+  height: 300px;
+  margin: auto;
+}
+
+.dropArea,
+.area {
+  height: 100%;
+  box-sizing: border-box;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  font-weight: 600;
+  font-size: 18px;
+  background-repeat: no-repeat;
+  background-size: 100px;
+  background-position: -20px bottom;
+}
+
+.dropArea {
+  border: dashed 4px $primary-orange;
+  background-image: url('../../../img/drag-and-drop/cat2.png');
+}
+
+.area {
+  border: solid 4px $primary-orange;
+  background-image: url('../../../img/drag-and-drop/cat.png');
+}

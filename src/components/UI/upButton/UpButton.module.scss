@@ -1,0 +1,25 @@
+.upBtnHolder {
+  background: #ffa41c;
+  position: sticky;
+  left: calc(100vw - 100px);
+  bottom: 80px;
+  border-radius: 50%;
+  opacity: 0;
+  scale: 0;
+  transition: 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  width: min-content;
+  margin-bottom: 2rem;
+
+  &.visible {
+    opacity: 1;
+    scale: 1;
+  }
+
+  .upBtn {
+    color: white;
+
+    &:hover {
+      background: #ffb340;
+    }
+  }
+}

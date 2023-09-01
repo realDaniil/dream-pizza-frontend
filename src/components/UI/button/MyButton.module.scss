@@ -2,7 +2,7 @@
 
 .myButton {
   color: #ffffff;
-  background: $primary-orange;
+  background: #ff9800;
   cursor: pointer;
   border: none;
   outline: 2px transparent solid;
@@ -14,46 +14,20 @@
 
   &.active {
     pointer-events: none;
-
-    &:focus {
-      box-shadow: none;
-    }
-
-    &:active {
-      box-shadow: none;
-    }
+    background: #ff9800;
+    box-shadow: 0 0 0 0.2rem rgb(255, 153, 0, 0.5);
   }
 
   &.notActive {
-    background: #ffffff;
-    color: $primary-orange;
+    color: #f57c00;
+    background: white;
 
-    &:focus {
-      box-shadow: none;
-    }
-
-    &:active {
-      box-shadow: none;
-    }
-  }
-
-  &:active {
-    box-shadow: 0 0 0 0.2rem rgba(255, 187, 0, 0.5);
-  }
-
-  &:focus {
-    box-shadow: 0 0 0 0.2rem rgba(255, 187, 0, 0.5);
-  }
-
-  @media (hover: hover) {
     &:hover {
-      background: rgb(255, 119, 0);
+      background: #f6f6f6;
     }
   }
 
-  @media (hover: none) {
-    &:active {
-      background: orange;
-    }
+  &:hover {
+    background: #f57c00;
   }
 }

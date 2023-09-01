@@ -1,3 +1,10 @@
+.holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 70px);
+}
+
 .paper {
   width: 400px;
   padding: 50px;

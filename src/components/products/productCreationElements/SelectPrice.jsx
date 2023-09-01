@@ -1,4 +1,4 @@
-import { FormControlLabel, Switch, TextField } from '@mui/material'
+import { Box, FormControlLabel, Switch, TextField } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { myAxios } from '../../../myAxios'
 
@@ -18,7 +18,7 @@ const SelectPrice = ({ isEditing = false, submitPrices, setSubmitPrices, id }) =
           setMediumPrice(data.prices.find(obj => obj.size === 'medium')?.price)
           setLargePrice(data.prices.find(obj => obj.size === 'large')?.price)
           setAnyPrice(data.prices.find(obj => obj.size === 'any')?.price)
-          if(data.prices.find(obj => obj.size === 'any')?.price) setChecked(false)
+          if (data.prices.find(obj => obj.size === 'any')?.price) setChecked(false)
         })
         .catch(err => console.log(err))
         .finally(() => setIsLoading(false))
@@ -38,55 +38,60 @@ const SelectPrice = ({ isEditing = false, submitPrices, setSubmitPrices, id }) =
   if (isLoading) return <>Loading...</>
 
   return (
-      <div>
-        <FormControlLabel style={{ userSelect: 'none' }}
-          control={
-            <Switch
-              checked={checked}
-              onChange={e => setChecked(e.target.checked)}
-            />
-          }
-          label={"Створити ціни до трьох розмірів"}
-        />
-        {checked ?
-          <>
-            <TextField
-              variant="standard"
-              label='Малий розмір'
-              type='number'
-              fullWidth
-              value={smallPrice}
-              onChange={e => setSmallPrice(e.target.value)}
-            />
-            <TextField
-              variant="standard"
-              label='Середній розмір'
-              type='number'
-              fullWidth
-              value={mediumPrice}
-              onChange={e => setMediumPrice(e.target.value)}
-            />
-            <TextField
-              variant="standard"
-              label='Великий розмір'
-              type='number'
-              fullWidth
-              value={largePrice}
-              onChange={e => setLargePrice(e.target.value)}
-            />
-          </>
-          :
-          <TextField
-            variant="standard"
-            label="Стандартний розмір"
-            type='number'
-            fullWidth
-            value={anyPrice}
-            onChange={e => setAnyPrice(e.target.value)}
+    <Box my={'2rem'}>
+      <FormControlLabel style={{ userSelect: 'none' }}
+        control={
+          <Switch
+            color={'warning'}
+            checked={checked}
+            onChange={e => setChecked(e.target.checked)}
           />
         }
-      </div>
-    )
+        label={"Створити ціни до трьох розмірів"}
+      />
+      {checked ?
+        <>
+          <TextField
+            color={'warning'}
+            variant="standard"
+            label='Малий розмір'
+            type='number'
+            fullWidth
+            value={smallPrice}
+            onChange={e => setSmallPrice(e.target.value)}
+          />
+          <TextField
+            color={'warning'}
+            variant="standard"
+            label='Середній розмір'
+            type='number'
+            fullWidth
+            value={mediumPrice}
+            onChange={e => setMediumPrice(e.target.value)}
+          />
+          <TextField
+            color={'warning'}
+            variant="standard"
+            label='Великий розмір'
+            type='number'
+            fullWidth
+            value={largePrice}
+            onChange={e => setLargePrice(e.target.value)}
+          />
+        </>
+        :
+        <TextField
+          color={'warning'}
+          variant="standard"
+          label="Стандартний розмір"
+          type='number'
+          fullWidth
+          value={anyPrice}
+          onChange={e => setAnyPrice(e.target.value)}
+        />
+      }
+    </Box>
+  )
 }
 
 export default SelectPrice

@@ -1,15 +1,15 @@
-import { Button, FormControl, InputLabel, MenuItem, Paper, Select } from '@mui/material'
+import { Box, Button, FormControl, InputLabel, MenuItem, Paper, Select } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import CreateReview from './CreateReview'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchUser } from '../../../store/actions/actions'
+import { fetchUser } from '../../../store/slices/userSlice'
 import { useNavigate } from 'react-router-dom'
 import { REGISTRATION_ROUTE } from '../../../utils/constants'
 
 const ReviewsBar = ({ filter, setFilter }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const userData = useSelector(state => state.user?.userData)
+  const userData = useSelector(state => state.user.user?.userData)
   const [open, setOpen] = useState(false)
 
 
@@ -20,22 +20,23 @@ const ReviewsBar = ({ filter, setFilter }) => {
   const isAuth = Boolean(userData)
 
   return (
-    <Paper sx={{ p: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <Paper sx={{ py: 1, px: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
       {!isAuth ?
-        <>
+        <Box display={'flex'} alignItems={'center'}>
           <h4>Зареєструйтесь, щоб мати можливість писати коментарі.</h4>
-          <Button variant='contained' onClick={() => navigate(REGISTRATION_ROUTE)}>Зареєструватись</Button>
-        </>
+          <Button sx={{ml: 1}} color={'warning'} variant='contained' onClick={() => navigate(REGISTRATION_ROUTE)}>Зареєструватись</Button>
+        </Box>
         :
         <>
-          <Button variant={'contained'} onClick={() => setOpen(true)}>Створити відгук</Button>
+          <Button color={'warning'} variant={'contained'} onClick={() => setOpen(true)}>Створити відгук</Button>
           {/* <Button variant={'contained'} onClick={() => navigate(CREATE_REVIEW_ROUTE)}>Створити відгук</Button> */}
           <CreateReview open={open} setOpen={setOpen} />
         </>
       }
       <FormControl>
-        <InputLabel>Сортувати</InputLabel>
+        <InputLabel color={'warning'}>Сортувати</InputLabel>
         <Select
+          color={'warning'}
           value={filter || 'Не сортувати'}
           label={'Тип продукту'}
           onChange={e => setFilter(e.target.value)}

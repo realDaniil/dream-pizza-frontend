@@ -15,8 +15,9 @@ const PasswordInput = ({ variant, sx, value, onChange, label = 'Пароль', e
     <>
       {variant === "outlined" ? (
         <FormControl sx={sx} variant="outlined" error={error}>
-          <InputLabel htmlFor="outlined-adornment-password">{label}</InputLabel>
+          <InputLabel color='warning' htmlFor="outlined-adornment-password">{label}</InputLabel>
           <OutlinedInput
+            color='warning'
             value={value}
             onChange={onChange}
             type={showPassword ? 'text' : 'password'}
@@ -41,8 +42,9 @@ const PasswordInput = ({ variant, sx, value, onChange, label = 'Пароль', e
         </FormControl>
       ) : (
         <FormControl sx={sx} variant="standard" error={error}>
-          <InputLabel htmlFor="standard-adornment-password">{label}</InputLabel>
+          <InputLabel color='warning' htmlFor="standard-adornment-password">{label}</InputLabel>
           <Input
+            color='warning'
             value={value}
             onChange={onChange}
             type={showPassword ? 'text' : 'password'}

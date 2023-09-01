@@ -1,0 +1,23 @@
+.basket {
+  background: #ffa41c;
+  position: fixed;
+  left: calc(100vw - 100px);
+  top: 80px;
+  border-radius: 50%;
+  transition: 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  scale: 0;
+  opacity: 0;
+
+  &.visible {
+    scale: 1;
+    opacity: 1;
+  }
+
+  .basketBtn {
+    color: white;
+
+    &:hover {
+      background: #ffb340;
+    }
+  }
+}

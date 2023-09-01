@@ -47,6 +47,7 @@ const ChangeUserData = ({ userData, setOpen, open }) => {
     >
       <Box sx={style}>
         <TextField
+        color='warning'
           variant="standard"
           placeholder={userData?.fullName}
           error={fullName.length < 3 && fullName.length !== 0}
@@ -57,6 +58,7 @@ const ChangeUserData = ({ userData, setOpen, open }) => {
           onChange={e => setFullName(e.target.value)}
         />
         <TextField
+        color='warning'
           type='email'
           variant="standard"
           placeholder={userData?.email}
@@ -77,7 +79,7 @@ const ChangeUserData = ({ userData, setOpen, open }) => {
           value={newPassword}
           onChange={e => setNewPassword(e.target.value)}
         />
-        <Button fullWidth variant="contained" onClick={onSubmit}>Змінити</Button>
+        <Button color='warning' fullWidth variant="contained" onClick={onSubmit}>Змінити</Button>
       </Box>
     </Modal>
   )

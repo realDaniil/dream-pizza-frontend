@@ -10,14 +10,13 @@ import img3 from '../../../img/gallery/img3.avif'
 import img4 from '../../../img/gallery/img4.jpg'
 import img5 from '../../../img/gallery/img5.avif'
 import img6 from '../../../img/gallery/img6.avif'
-import { Typography } from '@mui/material';
 
 const imgArr = [img1, img2, img3, img4, img5, img6]
 
 const Gallery = () => {
   return (
     <div>
-      <Typography variant='h5' sx={{ textAlign: 'center', textTransform: 'uppercase', letterSpacing: 2, my: 2 }}>Фотогалерея</Typography>
+      <h2 style={{ textAlign: 'center' }}>Фотогалерея</h2>
       <Swiper
         modules={[Navigation, Autoplay]}
         spaceBetween={50}

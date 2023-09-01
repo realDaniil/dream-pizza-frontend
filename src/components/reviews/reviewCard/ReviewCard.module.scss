@@ -1,0 +1,13 @@
+.card {
+  position: relative;
+  padding: 1rem;
+  .editAndRemoveMenuHolder {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+  }
+  .userNameHolder {
+    display: flex;
+    align-items: center;
+  }
+}

@@ -7,14 +7,15 @@ import { myAxios } from '../../../myAxios'
 import { Button } from '@mui/material'
 
 const getReviews = async (nameFiler, limit) => {
-  let response
   if (nameFiler === 'Від більшої') {
-    response = await myAxios.get(`/reviews-from-high-to-low?limit=${limit}`)
+    const { data } = await myAxios.get(`/reviews-from-high-to-low?limit=${limit}`)
+    return data
   } else if (nameFiler === 'Від меншої') {
-    response = await myAxios.get(`/reviews-from-low-to-high?limit=${limit}`)
+    const { data } = await myAxios.get(`/reviews-from-low-to-high?limit=${limit}`)
+    return data
   } else {
-    response = await myAxios.get(`/reviews?limit=${limit}`)
-    return response.data
+    const { data } = await myAxios.get(`/reviews?limit=${limit}`)
+    return data
   }
 }
 
@@ -29,7 +30,7 @@ const AllReviews = ({ filter }) => {
     <div>
       {data?.map(review => <ReviewCard key={review._id} data={review} />)}
       {data?.length >= limit &&
-        <Button variant='contained' onClick={() => setLimit(prev => prev + 10)}>Завантажити ще</Button>
+        <Button color='warning' variant='contained' onClick={() => setLimit(prev => prev + 10)}>Завантажити ще</Button>
       }
     </div>
   )

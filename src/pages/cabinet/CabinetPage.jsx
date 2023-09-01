@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { userLogout } from '../../store/actions/actions'
+import { userLogout } from '../../store/slices/userSlice'
 import { useDispatch } from 'react-redux'
 import { myAxios } from '../../myAxios'
 import { Button, CircularProgress, LinearProgress } from '@mui/material'
@@ -61,12 +61,12 @@ const CabinetPage = () => {
     <div>
       {isAdmin &&
         <div>
-          <Button onClick={restoreReviews}>Відновити відгуки</Button>
-          <Button onClick={restoreProducts}>Відновити продукти</Button>
-          <Button onClick={restoreTypes}>Відновити типи</Button>
+          <Button variant="contained" color='error' onClick={restoreReviews}>Відновити відгуки</Button>
+          <Button variant="contained" color='error' onClick={restoreProducts}>Відновити продукти</Button>
+          <Button variant="contained" color='error' onClick={restoreTypes}>Відновити типи</Button>
         </div>
       }
-      <button onClick={logout}>выйти</button>
+      <Button variant='contained' onClick={logout}>выйти</Button>
       <h3>{data?.userData?.fullName}</h3>
       <p>{data?.userData?.email}</p>
       <p>Дата регистрации: {formattedDate}</p>

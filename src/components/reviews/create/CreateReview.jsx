@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { myAxios } from '../../../myAxios'
 import CreateReviewSkeleton from './CreateReviewSkeleton'
 
-const CreateReview = ({open, setOpen}) => {
+const CreateReview = ({ open, setOpen }) => {
   const { id } = useParams()
   const isEditing = Boolean(id)
   const navigate = useNavigate()
@@ -39,7 +39,7 @@ const CreateReview = ({open, setOpen}) => {
       isEditing
         ? await myAxios.patch(`/reviews/${id}`, fields)
         : await myAxios.post('/reviews', fields)
-        window.location.reload()
+      window.location.reload()
     } catch (error) {
       console.log(error)
       alert(`Помилка при ${isEditing ? 'редагуванні' : 'створенні'} відгуку`)
@@ -47,37 +47,40 @@ const CreateReview = ({open, setOpen}) => {
   }
   if (isLoading) return <CreateReviewSkeleton />
   return (
-      <Modal
-        sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-        open={open}
-        onClose={() => setOpen(false)}
-      >
-        <Paper className={cl.paper}>
-          <TextField
-            id="standard-basic"
-            label="Заголовок"
-            variant="standard"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <TextareaAutosize
-            style={{ overflow: 'auto' }}
-            className={cl.textarea}
-            placeholder='Текст'
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-          />
-          <Rating
-            name="simple-controlled"
-            value={starsValue}
-            onChange={(event, newValue) => {
-              setStarsValue(newValue)
-            }}
-          />
-          <Button variant="outlined" onClick={() => navigate(setOpen(false))}>Відміна</Button>
-          <Button onClick={onSubmit} variant="contained">{isEditing ? 'Змінити' : 'Відправити'}</Button>
-        </Paper>
-      </Modal>
+    <Modal
+      sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+      open={open}
+      onClose={() => setOpen(false)}
+    >
+      <Paper className={cl.paper}>
+        <TextField
+          color='warning'
+          id="standard-basic"
+          label="Заголовок"
+          variant="standard"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <TextareaAutosize
+          style={{ overflow: 'auto' }}
+          className={cl.textarea}
+          placeholder='Текст'
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
+        <Rating
+          name="simple-controlled"
+          value={starsValue}
+          onChange={(event, newValue) => {
+            setStarsValue(newValue)
+          }}
+        />
+        <Box width={'100%'} mt={'1rem'} display={'flex'}>
+          <Button fullWidth color='warning' onClick={onSubmit} variant="contained">{isEditing ? 'Змінити' : 'Відправити'}</Button>
+          <Button sx={{ ml: '1rem' }} color='warning' onClick={() => navigate(setOpen(false))}>Відміна</Button>
+        </Box>
+      </Paper>
+    </Modal>
   )
 }
 

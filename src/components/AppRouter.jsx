@@ -1,16 +1,15 @@
 import { Routes, Route } from 'react-router-dom';
-import HomePage from '../pages/home/HomePage';
+import MainPage from '../pages/main/MainPage';
 import { adminRoutes, authRoutes, publicRoutes } from '../routes';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUser } from '../store/actions/actions';
+import { fetchUser } from '../store/slices/userSlice';
 import { useEffect, useState } from 'react';
 import MyLoader from './UI/MyLoader';
 
 const AppRouter = () => {
   const dispatch = useDispatch()
-  const userData = useSelector(state => state.user?.userData)
+  const userData = useSelector(state => state.user.user?.userData)
   const [isLoading, setIsLoading] = useState(true)
-
   useEffect(() => {
     dispatch(fetchUser())
       .then(() => {
@@ -34,7 +33,7 @@ const AppRouter = () => {
       {publicRoutes.map(({ path, Element }) => (
         <Route key={path} path={path} element={<Element />} />
       ))}
-      <Route path='*' element={<HomePage />} />
+      <Route path='*' element={<MainPage />} />
     </Routes>
   )
 }

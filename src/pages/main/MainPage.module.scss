@@ -1,0 +1,17 @@
+.grid {
+  padding: 1rem;
+
+  .gridItem {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.holder {
+  .title {
+    font-weight: 600;
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 36px;
+  }
+}

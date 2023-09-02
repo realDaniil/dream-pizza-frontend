@@ -28,7 +28,9 @@ const DragAndDrop = ({ setImageUrl }) => {
       alert('Помилка під час завантаження зображення')
     }
   }
-
+  if (/Mobi/.test(navigator.userAgent)) {
+    return null
+  }
   return (
     <div className={cl.dragAndDrop}>
       {drag

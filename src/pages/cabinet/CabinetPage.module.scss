@@ -1,0 +1,27 @@
+.holder {
+  margin-top: 1rem;
+}
+
+.paper {
+  padding: 1rem;
+}
+
+.userP {
+  font-weight: 500;
+  margin-bottom: 10px;
+
+  span {
+    font-weight: 600;
+  }
+}
+
+.adminPaper {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+
+  button {
+    margin: 5px;
+  }
+}

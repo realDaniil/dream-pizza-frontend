@@ -32,3 +32,9 @@
   border: solid 4px $primary-orange;
   background-image: url('../../../img/drag-and-drop/cat.png');
 }
+
+@media (max-width: 800px) {
+  .dragAndDrop {
+    display: none;
+  }
+}

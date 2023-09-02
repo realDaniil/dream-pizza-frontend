@@ -21,23 +21,25 @@ const ChangeUserData = ({ userData, setOpen, open }) => {
   const [newPassword, setNewPassword] = useState('')
 
   const onSubmit = async () => {
-    try {
-      const fields = {}
-      function addIfNotEmpty(object, key, value) {
-        if (value !== '') {
-          object[key] = value
+    if (window.confirm('Змінити данні?')) {
+      try {
+        const fields = {}
+        function addIfNotEmpty(object, key, value) {
+          if (value !== '') {
+            object[key] = value
+          }
         }
-      }
-      addIfNotEmpty(fields, 'fullName', fullName)
-      addIfNotEmpty(fields, 'email', email)
-      addIfNotEmpty(fields, 'currentPassword', currentPassword)
-      addIfNotEmpty(fields, 'password', newPassword)
+        addIfNotEmpty(fields, 'fullName', fullName)
+        addIfNotEmpty(fields, 'email', email)
+        addIfNotEmpty(fields, 'currentPassword', currentPassword)
+        addIfNotEmpty(fields, 'password', newPassword)
 
-      await myAxios.patch('/auth/update', fields)
-      window.location.reload()
-    } catch (error) {
-      console.log(error)
-      alert(`Помилка при редагуванні`)
+        await myAxios.patch('/auth/update', fields)
+        window.location.reload()
+      } catch (error) {
+        console.log(error)
+        alert(`Помилка при редагуванні`)
+      }
     }
   }
   return (
@@ -47,7 +49,7 @@ const ChangeUserData = ({ userData, setOpen, open }) => {
     >
       <Box sx={style}>
         <TextField
-        color='warning'
+          color='warning'
           variant="standard"
           placeholder={userData?.fullName}
           error={fullName.length < 3 && fullName.length !== 0}
@@ -58,7 +60,7 @@ const ChangeUserData = ({ userData, setOpen, open }) => {
           onChange={e => setFullName(e.target.value)}
         />
         <TextField
-        color='warning'
+          color='warning'
           type='email'
           variant="standard"
           placeholder={userData?.email}

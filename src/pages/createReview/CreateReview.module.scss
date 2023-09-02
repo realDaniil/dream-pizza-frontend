@@ -2,7 +2,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 70px);
+  height: calc(100vh - 70px);
+  position: absolute;
+  left: 0;
+  top: 70px;
+  width: 100%;
 }
 
 .paper {
@@ -48,5 +52,11 @@
       border-color: #f57c00;
       outline: 1px solid #f57c00;
     }
+  }
+}
+
+@media (max-width: 500px) {
+  .paper {
+    padding: 1rem;
   }
 }

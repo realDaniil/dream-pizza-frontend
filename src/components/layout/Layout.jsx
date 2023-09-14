@@ -33,8 +33,8 @@ const Layout = ({ children }) => {
           <Tooltip title={userData?.fullName}>
             <IconButton onClick={() => navigate(!userData ? LOGIN_ROUTE : CABINET_ROUTE)}>
               {userData?.role === 'ADMIN'
-                ? <Avatar sx={{ width: 30, height: 30 }}><VerifiedUserIcon style={{ color: 'white' }} /></Avatar>
-                : <Avatar sx={{ width: 30, height: 30 }}>{userData?.fullName[0]}</Avatar>
+                ? <Avatar sx={{ width: 30, height: 30, bgcolor:'#ffa41c' }}><VerifiedUserIcon style={{ color: 'white' }} /></Avatar>
+                : <Avatar sx={{ width: 30, height: 30, bgcolor:'#ffa41c' }}>{userData?.fullName[0]}</Avatar>
               }
             </IconButton>
           </Tooltip>
@@ -52,7 +52,7 @@ const Layout = ({ children }) => {
         <footer>
           <Container className={cl.container} maxWidth={'lg'}>
             <div className={cl.logoHolder}>
-              <Link to={'/'}>
+              <Link to={'/'} onClick={() => window.scrollTo(0, 0)}>
                 <img src={logo} alt="Dream Pizza" />
               </Link>
             </div>

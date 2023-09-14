@@ -4,13 +4,16 @@
   left: calc(100vw - 100px);
   top: 140px;
   border-radius: 50%;
-  transition: 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-  scale: 0;
-  opacity: 0;
+  z-index: 1;
+  // transition: 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  // scale: 0;
+  // opacity: 0;
+  animation: hidden forwards 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 
   &.visible {
-    scale: 1;
-    opacity: 1;
+    // scale: 1;
+    // opacity: 1;
+    animation: visible forwards 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
   }
 
   .basketBtn {
@@ -19,5 +22,45 @@
     &:hover {
       background: #ffb340;
     }
+  }
+}
+
+@media (max-width: 800px) {
+  .basket {
+    left: calc(100vw - 80px);
+    // transition: 0.2s;
+
+    &.topDistance {
+      top: 65px;
+    }
+  }
+}
+
+
+@media (max-width: 800px) {
+  .upBtnHolder {
+    left: calc(100vw - 80px);
+    bottom: 40px;
+  }
+}
+
+@keyframes hidden {
+  0% {}
+
+  100% {
+    opacity: 0;
+    scale: 0;
+  }
+}
+
+@keyframes visible {
+  0% {
+    opacity: 0;
+    scale: 0;
+  }
+
+  100% {
+    opacity: 1;
+    scale: 1;
   }
 }

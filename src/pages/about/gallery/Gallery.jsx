@@ -16,7 +16,7 @@ const imgArr = [img1, img2, img3, img4, img5, img6]
 const Gallery = () => {
   return (
     <div>
-      <h2 style={{ textAlign: 'center' }}>Фотогалерея</h2>
+      <h2 style={{ textAlign: 'center', marginBottom: 16 }}>Фотогалерея</h2>
       <Swiper
         modules={[Navigation, Autoplay]}
         spaceBetween={50}

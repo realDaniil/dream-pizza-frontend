@@ -37,6 +37,7 @@ const GetProducts = ({ productType, isGetTopSales = false }) => {
                 imageUrl={e.imageUrl}
                 prices={e.prices}
                 name={e.name}
+                isTopSales={e.isTopSales}
                 type={e.type}
                 id={e._id}
               />

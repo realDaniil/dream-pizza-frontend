@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import pizza from '../../img/pizza.svg'
+import { Skeleton } from '@mui/material'
 
 const MyImage = ({ src, style }) => {
   const [imageSrc, setImageUrl] = useState(process.env.REACT_APP_API_URL + src)
@@ -20,7 +21,8 @@ const MyImage = ({ src, style }) => {
       {imgLoaded ?
         <img src={imageSrc} style={{pointerEvents: 'none', ...style}} onError={handleImageError} alt={`Зображення продукту`} />
         :
-        <div>
+        <div style={{width: '100%', height: '100%'}}>
+          {/* <Skeleton width={240} height={240} /> */}
           <img style={{pointerEvents: 'none', ...style}} src={pizza} alt={`Зображення продукту`} />
           <img
             src={imageSrc}

@@ -36,7 +36,8 @@ footer {
   background: black;
   color: white;
   padding: 2rem 0;
-
+  margin-top: 2rem;
+  
   .container {
     display: flex;
     justify-content: space-between;
@@ -103,8 +104,14 @@ footer {
   }
 }
 
-@media (max-width: 700px) {
-  .container {
-    flex-direction: column;
+@media (max-width: 900px) {
+  footer {
+    div {
+      margin: 1rem;
+    }
+    .container {
+      max-width: fit-content;
+      flex-direction: column;
+    }
   }
 }

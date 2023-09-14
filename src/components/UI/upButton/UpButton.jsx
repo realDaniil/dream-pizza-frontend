@@ -5,10 +5,10 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 const UpButton = () => {
   const [visible, setVisible] = useState(false)
-  const [scrollPosition, setScrollPosition] = useState(window.pageYOffset)
+  const [scrollPosition, setScrollPosition] = useState(window.scrollY)
   const btnStyles = [cl.upBtnHolder]
   const handleScroll = () => {
-    const position = window.pageYOffset
+    const position = window.scrollY
     setScrollPosition(position)
   }
   useEffect(() => {
@@ -17,7 +17,7 @@ const UpButton = () => {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
-  if (window.innerHeight <= scrollPosition && visible !== true) {
+  if (window.innerHeight <= scrollPosition && 1500 <= scrollPosition && visible !== true) {
     setVisible(true)
   } else if (window.innerHeight > scrollPosition && visible !== false) {
     setVisible(false)
@@ -30,7 +30,7 @@ const UpButton = () => {
       className={btnStyles.join(' ')}
       onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
     >
-      <IconButton className={cl.upBtn} size={'large'}>
+      <IconButton color={'warning'} className={cl.upBtn} size={'large'}>
         <KeyboardArrowUpIcon />
       </IconButton>
     </div>

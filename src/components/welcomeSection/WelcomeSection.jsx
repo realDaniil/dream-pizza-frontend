@@ -46,15 +46,35 @@ const WelcomeSection = ({ setProduct, scrollToProducts }) => {
     selectProductButton(lastProductName)
   }, [])
 
+  const [menuDistance, setMenuDistance] = useState(70)
+  const [scrollPosition, setScrollPosition] = useState(window.scrollY)
+  const handleScroll = () => {
+    const position = window.scrollY
+    setScrollPosition(position)
+  }
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+  useEffect(() => {
+    if (70 - scrollPosition <= 0 && menuDistance !== 15) {
+      setMenuDistance(15)
+    }  else if (70 - scrollPosition > 15) {
+      setMenuDistance(70 - scrollPosition)
+    }
+  }, [scrollPosition])
+
   return (
     <div className={cl.welcomeHolder}>
       <div className={cl.welcomeBack}></div>
       <div className={cl.mobileNavHolder}>
-        <IconButton className={cl.mobileNavButton} size={'large'} onClick={() => setOpen(true)} color='warning'>
+        <IconButton className={cl.mobileNavButton} style={{ top: menuDistance }} size={'large'} onClick={() => setOpen(true)} color='warning'>
           <MenuIcon />
         </IconButton>
         {/* Modal для скрытия scrollbar */}
-        <Modal open={open} sx={{visibility: 'hidden'}}><></></Modal>  
+        <Modal open={open} sx={{ visibility: 'hidden' }}><></></Modal>
         <div className={`${cl.wrapperMobileNav} ${open ? cl.open : ''}`} onClick={() => setOpen(false)}>
           <nav className={`${cl.nav} ${cl.mobileNav}`} onClick={e => e.stopPropagation()}>
             <p data-product='Піца' className={activeProduct === 'Піца' ? cl.active : ''}>Піца</p>

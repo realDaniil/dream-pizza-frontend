@@ -38,7 +38,7 @@ const AboutPage = () => {
         </div>
       </div>
       <Modal
-        sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        sx={{ display: 'flex', justifyContent: 'center', overflow: 'auto' }}
         open={open}
         onClose={() => setOpen(false)}
       >

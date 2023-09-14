@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchUser } from '../../../store/slices/userSlice'
 import { useNavigate } from 'react-router-dom'
 import { REGISTRATION_ROUTE } from '../../../utils/constants'
+import cl from './ReviewsBar.module.scss'
+import MyButton from '../../UI/button/MyButton'
 
 const ReviewsBar = ({ filter, setFilter }) => {
   const navigate = useNavigate()
@@ -20,11 +22,11 @@ const ReviewsBar = ({ filter, setFilter }) => {
   const isAuth = Boolean(userData)
 
   return (
-    <Paper sx={{ py: 1, px: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <Paper className={cl.paper} >
       {!isAuth ?
-        <Box display={'flex'} alignItems={'center'}>
+        <Box className={cl.box}>
           <h4>Зареєструйтесь, щоб мати можливість писати коментарі.</h4>
-          <Button sx={{ml: 1}} color={'warning'} variant='contained' onClick={() => navigate(REGISTRATION_ROUTE)}>Зареєструватись</Button>
+          <MyButton sx={{ ml: 1, minWidth: 'min-content' }} onClick={() => navigate(REGISTRATION_ROUTE)}>Зареєструватись</MyButton>
         </Box>
         :
         <>

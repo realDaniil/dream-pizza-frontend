@@ -1,38 +1,47 @@
-import { Button, Card, CircularProgress, IconButton, TextField } from '@mui/material'
+import { Button, Card, CircularProgress, IconButton } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import MyImage from '../../UI/MyImage'
 import cl from './BaskedCard.module.scss'
 import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { addItem, decreaseItem, removeItem, removeTotalCount } from '../../../store/slices/basketSlice'
+import { addItem, decreaseItem, removeItem } from '../../../store/slices/basketSlice'
 import { useDispatch } from 'react-redux'
 
-const BaskedCard = ({ name, price, itemId, imageUrl, totalCount }) => {
-  
+const BaskedCard = ({ name, size, price, itemId, imageUrl, totalCount }) => {
+  const [count, setCount] = useState(totalCount)
   const [seconds, setSeconds] = useState(5)
   const [timerActive, setTimerActive] = useState(false)
-  
+  const [cardClasses, setCardClasses] = useState([cl.card])
+  const [productSize, setProductSize] = useState('')
   const dispatch = useDispatch()
   const addProduct = () => {
     dispatch(addItem({ itemId }))
   }
 
   const reduceTotalCount = () => {
-    dispatch(decreaseItem({ itemId }))
+    if (count - 1 < 1) {
+      setCount(count - 1)
+    } else {
+      dispatch(decreaseItem({ itemId }))
+      setCount(count - 1)
+    }
   }
 
   const removeTotalCountItem = () => {
-    dispatch(removeTotalCount({ itemId }))
+    setCount(0)
   }
 
   const removeBasketItem = () => {
-    dispatch(removeItem(itemId))
+    setCardClasses([cl.card, cl.removed])
+    setTimeout(() => {
+      dispatch(removeItem(itemId))
+    }, 500)
   }
 
   useEffect(() => {
     let intervalId
-    if (seconds >= 0 && timerActive) {
+    if (seconds >= 1 && timerActive) {
       intervalId = setInterval(() => {
         setSeconds(seconds - 1)
       }, 1000)
@@ -46,31 +55,47 @@ const BaskedCard = ({ name, price, itemId, imageUrl, totalCount }) => {
   }, [seconds, timerActive])
 
   useEffect(() => {
-    if (totalCount < 1) setTimerActive(true)
+    setCount(totalCount)
   }, [totalCount])
 
+  useEffect(() => {
+    if (count < 1) setTimerActive(true)
+  }, [count])
+
+  useEffect(() => {
+    if (size === 'small') {
+      setProductSize('M')
+    } else if (size === 'medium') {
+      setProductSize('L')
+    } else if (size === 'large') setProductSize('XL')
+  }, [])
+
   return (
-    <Card elevation={0} className={cl.card}>
-      {totalCount >= 1 ?
+    <Card elevation={0} className={cardClasses.join(' ')}>
+      {count >= 1 ?
         <>
           <div className={cl.leftSide}>
-            <MyImage style={{ height: '100px' }} src={imageUrl} />
+            <div className={cl.imgHolder}>
+              <MyImage style={{ height: '100px' }} src={imageUrl} />
+              {productSize && <div className={cl.sizeHolder}>{productSize}</div>}
+            </div>
             <p className={cl.name}>{name}</p>
           </div>
-
-          <div className={cl.totalCountHolder}>
-            <IconButton onClick={reduceTotalCount} size={'small'} color={'warning'}>
-              <RemoveIcon />
+          <div className={cl.rightSide}>
+            <div className={cl.totalCountHolder}>
+              <IconButton onClick={reduceTotalCount} size={'small'} color={'warning'}>
+                <RemoveIcon />
+              </IconButton>
+              {totalCount}
+              <IconButton onClick={addProduct} size={'small'} color={'warning'}>
+                <AddIcon />
+              </IconButton>
+              <p>{price * totalCount + 'грн'}</p>
+            </div>
+            <IconButton onClick={removeTotalCountItem} size={'small'} color={'warning'}>
+              <DeleteIcon />
             </IconButton>
-            {totalCount}
-            <IconButton onClick={addProduct} size={'small'} color={'warning'}>
-              <AddIcon />
-            </IconButton>
-          <p>{price * totalCount + 'грн'}</p>
           </div>
-          <IconButton onClick={removeTotalCountItem} size={'small'} color={'warning'}>
-            <DeleteIcon />
-          </IconButton>
         </>
         :
         <>
@@ -81,8 +106,8 @@ const BaskedCard = ({ name, price, itemId, imageUrl, totalCount }) => {
             </div>
             <p>Ви видалили "{name}"</p>
           </div>
-          <Button color='warning' sx={{m: 2}} onClick={() => {
-            addProduct()
+          <Button color='warning' sx={{ m: 2 }} onClick={() => {
+            setCount(totalCount)
             setTimerActive(false)
             setSeconds(5)
           }}>Повернути</Button>

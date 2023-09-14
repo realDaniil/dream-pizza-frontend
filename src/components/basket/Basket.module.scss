@@ -8,7 +8,30 @@
 }
 
 .paper {
-  width: 50vw;
+  width: 700px;
   height: max-content;
   margin: 5rem 0;
+}
+
+.totalPrice {
+  float: right;
+  font-weight: 500;
+  margin: 1rem 0;
+}
+
+@media (max-width: 1000px) {
+  .paper {
+    width: 550px;
+  }
+}
+
+@media (max-width: 800px) {
+  .holder {
+    background: white;
+  }
+
+  .paper {
+    width: 100%;
+    margin: 0;
+  }
 }

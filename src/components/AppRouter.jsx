@@ -15,12 +15,11 @@ const AppRouter = () => {
       .then(() => {
         setIsLoading(false)
       })
-  }, [dispatch])  
+  }, [dispatch])
 
   const isAuth = Boolean(userData)
   const isAdmin = userData?.role === 'ADMIN'
 
-  if (isLoading) return <MyLoader />
 
   return (
     <Routes>

@@ -6,22 +6,64 @@
   width: 100%;
   min-height: 120px;
   box-sizing: border-box;
+  overflow: hidden;
 
-  .leftSide {
-    display: flex;
-    align-items: center;
+  &.removed {
+    min-height: auto;
+    animation: removed 0.5s forwards;
+  }
+}
+
+@keyframes removed {
+  0% {
+    min-height: 120px;
+    max-height: 120px;
   }
 
-  .name {
-    font-size: 18px;
-    text-wrap: balance;
-    font-weight: 600;
+  100% {
+    min-height: 0;
+    max-height: 0;
+    margin-bottom: 0;
+    opacity: 0;
   }
+}
 
-  .totalCountHolder {
+.leftSide,
+.rightSide {
+  display: flex;
+  align-items: center;
+}
+
+.name {
+  font-size: 18px;
+  text-wrap: balance;
+  font-weight: 600;
+}
+
+.totalCountHolder {
+  display: flex;
+  align-items: center;
+}
+
+.imgHolder {
+  position: relative;
+  margin-right: 4px;
+
+  .sizeHolder {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: white;
+    background: #ED6C02;
+    border-radius: 50%;
+    font-size: 14px;
+    width: 18px;
+    height: 18px;
+    padding: 2px;
     display: flex;
     align-items: center;
-    min-width: 150px;
+    justify-content: center;
+    user-select: none;
   }
 }
 
@@ -34,5 +76,12 @@
   p {
     position: relative;
     right: 24px;
+  }
+}
+
+@media (max-width: 650px) {
+  .card, .leftSide {
+    flex-direction: column;
+    text-align: center;
   }
 }

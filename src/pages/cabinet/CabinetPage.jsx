@@ -86,7 +86,7 @@ const CabinetPage = () => {
         <p className={cl.userP}>Дата реєстрації: <span>{formattedDate}</span></p>
         <ChangeUserData setOpen={setOpen} open={open} userData={data?.userData} />
         <div>
-          <MyButton variant="contained" sx={{ mr: 2 }} onClick={() => setOpen(true)}>Змінити данні</MyButton>
+          {!isAdmin && <MyButton variant="contained" sx={{ mr: 2 }} onClick={() => setOpen(true)}>Змінити данні</MyButton>}
           <Button color={'error'} variant='contained' onClick={logout}>Вийти</Button>
         </div>
       </Paper>

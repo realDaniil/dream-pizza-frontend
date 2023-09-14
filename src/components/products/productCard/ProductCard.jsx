@@ -10,7 +10,7 @@ import MyButton from '../../UI/button/MyButton'
 import MyImage from '../../UI/MyImage'
 import { addItem } from '../../../store/slices/basketSlice'
 
-const ProductCard = ({ name, prices, ingredients, imageUrl, type, id, previewMode = false }) => {
+const ProductCard = ({ name, prices, ingredients, imageUrl, type, id, previewMode = false, isTopSales = false }) => {
   const dispatch = useDispatch()
   const userData = useSelector(state => state.user.user?.userData)
   const basketItems = useSelector(state => state.basket.items)
@@ -50,7 +50,10 @@ const ProductCard = ({ name, prices, ingredients, imageUrl, type, id, previewMod
           />
         </div>
       }
-      <MyImage src={imageUrl} />
+      <div className={cl.img_holder}>
+        <MyImage src={imageUrl} />
+        {isTopSales && <div className={cl.isTop}>Топ</div>}
+      </div>
       <p className={cl.name}>{name}</p>
       {ingredients &&
         <p style={{ margin: '10px 0' }}>

@@ -37,7 +37,7 @@ footer {
   color: white;
   padding: 2rem 0;
   margin-top: 2rem;
-  
+
   .container {
     display: flex;
     justify-content: space-between;
@@ -65,7 +65,7 @@ footer {
     width: 150px;
 
     img {
-      width: 100%;
+      width: 150px;
     }
   }
 
@@ -109,9 +109,19 @@ footer {
     div {
       margin: 1rem;
     }
+
     .container {
       max-width: fit-content;
       flex-direction: column;
+      text-align: center;
+      justify-content: center;
+    }
+
+    .logoHolder {
+      margin: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
     }
   }
 }

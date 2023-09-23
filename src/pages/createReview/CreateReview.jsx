@@ -7,6 +7,7 @@ import { myAxios } from '../../myAxios'
 import CreateReviewSkeleton from './CreateReviewSkeleton'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser } from './../../store/slices/userSlice';
+import MyLoader from '../../components/UI/MyLoader'
 
 const CreateReview = () => {
   const { id } = useParams()
@@ -55,7 +56,7 @@ const CreateReview = () => {
       alert(`Помилка при ${isEditing ? 'редагуванні' : 'створенні'} відгуку`)
     }
   }
-  if (isLoading) return <CreateReviewSkeleton />
+  if (isLoading) return <MyLoader />
   return (
     <div className={cl.holder}>
       <Paper className={cl.paper}>

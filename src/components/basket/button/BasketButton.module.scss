@@ -28,7 +28,7 @@
 @media (max-width: 800px) {
   .basket {
     left: calc(100vw - 80px);
-    // transition: 0.2s;
+    transition: 0.2s;
 
     &.topDistance {
       top: 65px;
@@ -45,7 +45,10 @@
 }
 
 @keyframes hidden {
-  0% {}
+  0% {
+    opacity: 0;
+    scale: 0;
+  }
 
   100% {
     opacity: 0;

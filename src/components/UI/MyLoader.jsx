@@ -9,12 +9,12 @@ const style = {
   height: '100vh',
   position: 'fixed',
   top: 0,
-  left: 0
+  left: 0,
 }
 
 const MyLoader = () => {
   return (
-    <div style={style}><CircularProgress /></div>
+    <div style={style}><CircularProgress color={'warning'} /></div>
   )
 }
 

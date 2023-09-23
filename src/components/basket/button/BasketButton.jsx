@@ -36,9 +36,9 @@ const BasketButton = ({ setOpen }) => {
       totalSum += item.price * item.totalCount
     })
     setTotalSum(totalSum)
-    if (basketItems.length !== 0) {
-      setBasketClasses([...basketClasses, cl.visible])
-    } else setBasketClasses(basketClasses.filter(e => e !== cl.visible))
+    if (basketItems.length !== 0 && !basketClasses.includes(cl.visible)) {
+      setBasketClasses(prevClasses => [...prevClasses, cl.visible])
+    } else if (basketItems.length === 0) setBasketClasses(prevClasses => prevClasses.filter(e => e !== cl.visible))
     }, [basketItems])
   return (
     <div className={basketClasses.join(' ')} onClick={() => setOpen(true)}>

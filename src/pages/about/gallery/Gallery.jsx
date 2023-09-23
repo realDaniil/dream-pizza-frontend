@@ -4,12 +4,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import img1 from '../../../img/gallery/img1.avif'
-import img2 from '../../../img/gallery/img2.avif'
-import img3 from '../../../img/gallery/img3.avif'
+import img1 from '../../../img/gallery/img1.jpg'
+import img2 from '../../../img/gallery/img2.jpg'
+import img3 from '../../../img/gallery/img3.jpg'
 import img4 from '../../../img/gallery/img4.jpg'
-import img5 from '../../../img/gallery/img5.avif'
-import img6 from '../../../img/gallery/img6.avif'
+import img5 from '../../../img/gallery/img5.jpg'
+import img6 from '../../../img/gallery/img6.jpg'
 
 const imgArr = [img1, img2, img3, img4, img5, img6]
 

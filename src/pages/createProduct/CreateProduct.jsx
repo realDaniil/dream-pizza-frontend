@@ -11,6 +11,7 @@ import cl from './CreateProduct.module.scss'
 import DragAndDrop from '../../components/UI/dragAndDrop/DragAndDrop';
 import { Card, FormControlLabel, Switch } from '@mui/material';
 import MyImage from '../../components/UI/MyImage';
+import MyLoader from '../../components/UI/MyLoader';
 
 const CreateProduct = () => {
   const { id } = useParams()
@@ -80,7 +81,7 @@ const CreateProduct = () => {
     }
   }
 
-  if (isLoading) return <CreateProductSkeleton />
+  if (isLoading) return <MyLoader />
 
   return (
     <Paper className={cl.paper}>

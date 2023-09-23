@@ -56,11 +56,11 @@ const Layout = ({ children }) => {
                 <img src={logo} alt="Dream Pizza" />
               </Link>
             </div>
-            <div className={cl.footerLinksHolder}>
+            {/* <div className={cl.footerLinksHolder}>
               <Link to={'/'}>Головна</Link>
               <Link to={ABOUT_ROUTE}>Про нас</Link>
               <Link to={CREATE_REVIEW_ROUTE}>Написати відгук</Link>
-            </div>
+            </div> */}
             <div className={cl.schedule}>
               <p className={cl.title}>Графік роботи</p>
               <p>11:00 - 22:30</p>

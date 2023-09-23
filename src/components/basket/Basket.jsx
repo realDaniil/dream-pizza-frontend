@@ -20,7 +20,12 @@ const Basket = () => {
   const [open, setOpen] = useState(false)
   const [paymentMethod, setPaymentMethod] = useState('cash')
   const [deliveryOptions, setDeliveryOptions] = useState('courier')
-  
+
+  const handlerOrder = () => {
+    localStorage.removeItem('basket')
+    window.location.reload()
+  }
+
   const { pathname } = useLocation()
   const basketItems = useSelector(state => state.basket.items)
   const [totalSum, setTotalSum] = useState(0)
@@ -32,7 +37,7 @@ const Basket = () => {
     })
     setTotalSum(totalSum)
   }, [basketItems, open])
-  if (pathname !== '/') return null
+  if (pathname !== '/') return
   return (
     <>
       <Modal
@@ -41,7 +46,7 @@ const Basket = () => {
       >
         <div className={cl.holder} onClick={e => setOpen(false)}>
           <Paper sx={{ p: 4 }} className={cl.paper} onClick={e => e.stopPropagation()}>
-            <IconButton sx={{float: 'right'}} onClick={() => setOpen(false)}>
+            <IconButton sx={{ float: 'right' }} onClick={() => setOpen(false)}>
               <CloseIcon />
             </IconButton>
             {basketItems.map(e =>
@@ -56,8 +61,8 @@ const Basket = () => {
               />
             )}
             <p className={cl.totalPrice}>Сума: {totalSum} грн.</p>
-            <TextField sx={{mb:2}} fullWidth label="Ваше ім'я" color='warning' placeholder='Микита' />
-            <TextField sx={{mb:2}} fullWidth label="Номер телефону" color='warning' type={'tel'} placeholder='+380 (99) 999-99-99' />
+            <TextField sx={{ mb: 2 }} fullWidth label="Ваше ім'я" color='warning' placeholder='Микита' />
+            <TextField sx={{ mb: 2 }} fullWidth label="Номер телефону" color='warning' type={'tel'} placeholder='+380 (99) 999-99-99' />
             <p>Варіанти доставки</p>
             <RadioGroup
               value={deliveryOptions}
@@ -66,10 +71,10 @@ const Basket = () => {
               <FormControlLabel value="courier" control={<Radio sx={radioSx} />} label="Доставка кур'єром по місту" />
               <FormControlLabel value="pickup" control={<Radio sx={radioSx} />} label="Самовивіз" />
             </RadioGroup>
-            <TextField sx={{mb:2}} fullWidth label="Вулиця" color='warning' placeholder='Шевченка' disabled={deliveryOptions === 'pickup'} />
-            <TextField sx={{mb:2}} fullWidth label="Будинок" color='warning' placeholder='23а' disabled={deliveryOptions === 'pickup'} />
-            <TextField sx={{mb:2}} fullWidth label="Під'їзд" color='warning' placeholder='1' disabled={deliveryOptions === 'pickup'} />
-            <TextField sx={{mb:2}} fullWidth label="Номер квартири" color='warning' placeholder='248' disabled={deliveryOptions === 'pickup'} />
+            <TextField sx={{ mb: 2 }} fullWidth label="Вулиця" color='warning' placeholder='Шевченка' disabled={deliveryOptions === 'pickup'} />
+            <TextField sx={{ mb: 2 }} fullWidth label="Будинок" color='warning' placeholder='23а' disabled={deliveryOptions === 'pickup'} />
+            <TextField sx={{ mb: 2 }} fullWidth label="Під'їзд" color='warning' placeholder='1' disabled={deliveryOptions === 'pickup'} />
+            <TextField sx={{ mb: 2 }} fullWidth label="Номер квартири" color='warning' placeholder='248' disabled={deliveryOptions === 'pickup'} />
             <p>Спосіб оплати</p>
             <RadioGroup
               value={paymentMethod}
@@ -78,8 +83,8 @@ const Basket = () => {
               <FormControlLabel value="cash" control={<Radio sx={radioSx} />} label="Готівкою при отриманні" />
               <FormControlLabel value="terminal" control={<Radio sx={radioSx} />} label="Оплата терміналом при отриманні" />
             </RadioGroup>
-            <TextField sx={{mb:2}} fullWidth label="Коментар до замовлення" color='warning' placeholder='Коментар' />
-            <MyButton fullWidth>Оформити замовлення</MyButton>
+            <TextField sx={{ mb: 2 }} fullWidth label="Коментар до замовлення" color='warning' placeholder='Коментар' />
+            <MyButton fullWidth onClick={handlerOrder}>Оформити замовлення</MyButton>
           </Paper>
         </div>
       </Modal>

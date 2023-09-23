@@ -14,7 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { IconButton, Modal } from '@mui/material'
 
 const WelcomeSection = ({ setProduct, scrollToProducts }) => {
-  const lastProductName = localStorage.getItem('last-product-name')
+  const lastProductName = sessionStorage.getItem('last-product-name')
   const [img, setImg] = useState(pizza)
   const navigate = useNavigate()
   const [activeProduct, setActiveProduct] = useState(lastProductName || 'Піца')
@@ -38,7 +38,7 @@ const WelcomeSection = ({ setProduct, scrollToProducts }) => {
         setProduct(product)
         setActiveProduct(product)
         selectProductButton(product)
-        localStorage.setItem('last-product-name', product)
+        sessionStorage.setItem('last-product-name', product)
         setOpen(false)
         scrollToProducts()
       }

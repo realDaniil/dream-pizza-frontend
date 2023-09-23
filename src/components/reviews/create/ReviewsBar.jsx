@@ -30,7 +30,7 @@ const ReviewsBar = ({ filter, setFilter }) => {
         </Box>
         :
         <>
-          <Button color={'warning'} variant={'contained'} onClick={() => setOpen(true)}>Створити відгук</Button>
+          <MyButton sx={{m: 2}} onClick={() => setOpen(true)}>Створити відгук</MyButton>
           {/* <Button variant={'contained'} onClick={() => navigate(CREATE_REVIEW_ROUTE)}>Створити відгук</Button> */}
           <CreateReview open={open} setOpen={setOpen} />
         </>

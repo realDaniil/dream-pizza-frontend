@@ -11,7 +11,7 @@ import MyButton from '../../components/UI/button/MyButton';
 import { Container } from '@mui/material';
 
 const MainPage = () => {
-  const lastProductName = localStorage.getItem('last-product-name')
+  const lastProductName = sessionStorage.getItem('last-product-name')
   const [nameProduct, setNameProduct] = useState(lastProductName || 'Піца')
   const productsRef = useRef(null)
   const navigate = useNavigate()

@@ -25,7 +25,7 @@ const GetProducts = ({ productType, isGetTopSales = false }) => {
     <Grid sx={{ py: '2rem' }} container spacing={4}>
       {isLoading ?
         [...Array(10)].map((e, index) =>
-          <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
+          <Grid sx={{ display: 'flex', justifyContent: 'center' }} key={index} item xs={12} sm={6} md={4} lg={3}>
             <ProductCardSkeleton />
           </Grid>)
         : data?.length === 0 ? <Grid item>Упс, щось пішло не так</Grid> :

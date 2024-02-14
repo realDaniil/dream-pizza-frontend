@@ -44,7 +44,7 @@ const Basket = () => {
         open={open}
         onClose={() => setOpen(false)}
       >
-        <div className={cl.holder} onClick={e => setOpen(false)}>
+        <div className={cl.holder} onClick={() => setOpen(false)}>
           <Paper className={cl.paper} onClick={e => e.stopPropagation()}>
             <IconButton sx={{ float: 'right' }} onClick={() => setOpen(false)}>
               <CloseIcon />

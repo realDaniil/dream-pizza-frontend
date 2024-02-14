@@ -21,6 +21,7 @@ const getProducts = async (type, isGetTopSales) => {
 
 const GetProducts = ({ productType, isGetTopSales = false }) => {
   const { data, isLoading, isError } = useQuery(['data', productType], () => getProducts(productType, isGetTopSales), { enabled: true, cacheTime: 0 })
+
   return (
     <Grid sx={{ py: '2rem' }} container spacing={4}>
       {isLoading ?
@@ -34,7 +35,7 @@ const GetProducts = ({ productType, isGetTopSales = false }) => {
               <ProductCard
                 key={e._id}
                 ingredients={e.ingredients}
-                imageUrl={e.imageUrl}
+                imageUrl={e.cloudinaryUrl}
                 prices={e.prices}
                 name={e.name}
                 isTopSales={e.isTopSales}

@@ -4,30 +4,25 @@ import { IconButton } from '@mui/material'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 const UpButton = () => {
-  const [visible, setVisible] = useState(false)
-  const [scrollPosition, setScrollPosition] = useState(window.scrollY)
-  const btnStyles = [cl.upBtnHolder]
-  const handleScroll = () => {
-    const position = window.scrollY
-    setScrollPosition(position)
-  }
+  const [btnClasses, setBtnClasses] = useState([cl.holder]);
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
+    const handleScroll = () => {
+      if (window.scrollY >= window.innerHeight) {
+        setBtnClasses([cl.holder, cl.show]);
+      } else if (window.scrollY < window.innerHeight) {
+        setBtnClasses([cl.holder]);
+      }
+    };
+    handleScroll();
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
-  if (window.innerHeight <= scrollPosition && 1500 <= scrollPosition && visible !== true) {
-    setVisible(true)
-  } else if (window.innerHeight > scrollPosition && visible !== false) {
-    setVisible(false)
-  }
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
-  if (visible) btnStyles.push(cl.visible)
   return (
     <div
-      // style={{ bottom: anchorPosition }}
-      className={btnStyles.join(' ')}
+      className={btnClasses.join(' ')}
       onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
     >
       <IconButton color={'warning'} className={cl.upBtn} size={'large'}>

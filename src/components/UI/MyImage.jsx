@@ -3,7 +3,7 @@ import pizza from '../../img/pizza.svg'
 import { Skeleton } from '@mui/material'
 
 const MyImage = ({ src, style }) => {
-  const [imageSrc, setImageUrl] = useState(process.env.REACT_APP_API_URL + src)
+  const [imageSrc, setImageUrl] = useState(src)
   const [imgLoaded, setImgLoaded] = useState(false)
   // useEffect(() => {
   //   setImageUrl(imageSrc)

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import cl from './DragAndDrop.module.scss'
 import { myAxios } from '../../../myAxios'
 
-const DragAndDrop = ({ setImageUrl }) => {
+const DragAndDrop = ({ setImageUrl, setImageUploadUrl }) => {
   const [drag, setDrag] = useState(false)
 
   const dragStartHandler = e => {
@@ -22,9 +22,9 @@ const DragAndDrop = ({ setImageUrl }) => {
       let file = [...e.dataTransfer.files][0]
       formData.append('image', file)
       const { data } = await myAxios.post('/upload', formData)
-      setImageUrl(data.url)
+      setImageUrl(data.cloudinary.url)
+      setImageUploadUrl(data.url)
     } catch (error) {
-      console.log(error)
       alert('Помилка під час завантаження зображення')
     }
   }

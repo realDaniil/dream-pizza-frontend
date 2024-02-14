@@ -101,7 +101,7 @@ const WelcomeSection = ({ setProduct, scrollToProducts }) => {
 
       <div className={cl.welcome}>
         <div className={cl.leftSide}>
-          <h1>З коханням доставка Піци в Чорноморську</h1>
+          <h1>З коханням доставка Піци в Одесі</h1>
           <p>Замовте піцу, в офіс або на природу в онлайн ресторані Dream Pizza. Ми працюємо з 11:00 до 22:30 та без вихідних.</p>
           <div className={cl.btnsHolder}>
             <MyButton size='large' onClick={scrollToProducts}>Замовити</MyButton>

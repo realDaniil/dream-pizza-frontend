@@ -16,7 +16,6 @@ const BasketPage = () => {
   const idsArray = basketItems.map(item => item.id)
   const idsString = idsArray.join(',')
   const { data, isLoading } = useQuery('data', () => getProducts(idsString))
-  console.log(data)
 
   return (
     <div>
@@ -24,7 +23,7 @@ const BasketPage = () => {
         <ProductCard
           key={e._id}
           ingredients={e.ingredients}
-          imageUrl={e.imageUrl}
+          imageUrl={e.cloudinaryUrl}
           prices={e.prices}
           name={e.name}
           type={e.type}

@@ -4,7 +4,6 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import { myAxios } from '../../myAxios';
 import { useNavigate, useParams } from 'react-router-dom';
-import CreateProductSkeleton from './CreateProductSkeleton';
 import SelectType from '../../components/products/productCreationElements/SelectType';
 import SelectPrice from '../../components/products/productCreationElements/SelectPrice';
 import cl from './CreateProduct.module.scss'
@@ -22,6 +21,7 @@ const CreateProduct = () => {
   const [name, setName] = useState('')
   const [ingredients, setIngredients] = useState('')
   const [imageUrl, setImageUrl] = useState('')
+  const [imageUploadUrl, setImageUploadUrl] = useState('')
   const [checked, setChecked] = useState(false)
 
   const [submitPrices, setSubmitPrices] = useState([])
@@ -34,7 +34,8 @@ const CreateProduct = () => {
       const file = e.target.files[0]
       formData.append('image', file)
       const { data } = await myAxios.post('/upload', formData)
-      setImageUrl(data.url)
+      setImageUrl(data.cloudinary.url)
+      setImageUploadUrl(data.url)
     } catch (error) {
       console.log(error)
       alert('Помилка під час завантаження зображення')
@@ -43,6 +44,7 @@ const CreateProduct = () => {
 
   const onClickRemoveImage = () => {
     setImageUrl('')
+    setImageUploadUrl('')
   }
 
   useEffect(() => {
@@ -52,7 +54,8 @@ const CreateProduct = () => {
           setName(data.name || '')
           setType(data.type || '')
           setIngredients(data.ingredients ? data.ingredients.join(', ') : '')
-          setImageUrl(data.imageUrl || '')
+          setImageUrl(data.cloudinaryUrl || '')
+          setImageUploadUrl(data.imageUrl || '')
           setChecked(data?.isTopSales || false)
         })
         .catch(err => console.log(err))
@@ -68,9 +71,9 @@ const CreateProduct = () => {
         type: type,
         prices: submitPrices,
         isTopSales: checked,
-        imageUrl
+        imageUrl: imageUploadUrl,
+        cloudinaryUrl: imageUrl
       }
-
       isEditing
         ? await myAxios.patch(`/products/${id}`, fields)
         : await myAxios.post('/products', fields)
@@ -90,13 +93,13 @@ const CreateProduct = () => {
           <Card className={cl.imgCard}>
             <MyImage src={imageUrl} />
           </Card>
-          : <DragAndDrop setImageUrl={setImageUrl} />
+          : <DragAndDrop setImageUrl={setImageUrl} setImageUploadUrl={setImageUploadUrl} />
         }
         <Button color={'warning'} disabled={imageUrl.length !== 0} onClick={() => inputFileRef.current.click()} variant="outlined" size="large">
-          Загрузить превью
+          Завантажити прев'ю
         </Button>
         <Button variant="contained" disabled={imageUrl.length === 0} color="error" onClick={onClickRemoveImage}>
-          Удалить
+          Видалити
         </Button>
         <input type="file" ref={inputFileRef} onChange={handleChangeFile} hidden />
       </div>

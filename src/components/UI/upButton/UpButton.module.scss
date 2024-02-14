@@ -1,22 +1,14 @@
-.upBtnHolder {
+.holder {
   background: #ffa41c;
   position: sticky;
-  left: calc(100vw - 100px);
   bottom: 80px;
   border-radius: 50%;
-  // opacity: 0;
-  // scale: 0;
-  // transition: 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  opacity: 0;
+  left: 100vw;
   width: min-content;
   margin-bottom: 2rem;
-  animation: hidden forwards 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  transition: 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
   z-index: 1;
-
-  &.visible {
-    // opacity: 1;
-    // scale: 1;
-    animation: visible forwards 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-  }
 
   .upBtn {
     color: white;
@@ -27,39 +19,15 @@
   }
 }
 
-@media (max-width: 900px) {
-  .upBtnHolder {
-    position: fixed;
-  }
+.show {
+  opacity: 1;
+  left: calc(100vw - 100px);
 }
 
-@media (max-width: 800px) {
-  .upBtnHolder {
+@media (max-width: 900px) {
+  .holder {
+    position: fixed;
     left: calc(100vw - 80px);
     bottom: 0;
-  }
-}
-
-@keyframes hidden {
-  0% {
-    opacity: 0;
-    scale: 0;
-  }
-
-  100% {
-    opacity: 0;
-    scale: 0;
-  }
-}
-
-@keyframes visible {
-  0% {
-    opacity: 0;
-    scale: 0;
-  }
-
-  100% {
-    opacity: 1;
-    scale: 1;
   }
 }
